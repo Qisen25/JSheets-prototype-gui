@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25/04/2020, 7:41:09 PM
+    Author     : student
+*/
+
+.mytable .column-header{
+    -fx-background-color: greenyellow;
+}
+
+
+.table-row-cell:selected{
+    -fx-background-color: white;
+    -fx-border-color: pink ;
+    -fx-border-width: 5 ;
+    -fx-text-fill: black; 
+}
+
+.bPane {
+    -fx-background-color: linear-gradient(#9bc9f6, #278bec, #6ab3fc, #9bc1e5, #4e657b);
+/*    -fx-background-color: linear-gradient(#e66465, #9198e5);*/
+}

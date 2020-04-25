@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="672.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kei_hci_prototype.FXMLDocumentController">
+    <children>
+      <TableView fx:id="table" layoutX="5.0" layoutY="9.0" prefHeight="606.0" prefWidth="859.0">
+        <columns>
+<!--            <TableColumn fx:id="index" prefWidth="75.0" text="Index" />
+          <TableColumn fx:id="A" prefWidth="75.0" text="A" />
+          <TableColumn fx:id="B" prefWidth="75.0" text="B" />-->
+        </columns>
+      </TableView>
+      <Pane fx:id="bPane" layoutX="866.0" layoutY="1.0" prefHeight="672.0" prefWidth="215.0">
+         <children>
+              <Button fx:id="button" layoutX="45.0" layoutY="61.0" onAction="#handleButtonAction" text="Click Me!" />
+         </children>
+      </Pane>
+      <ScrollBar layoutX="773.0" layoutY="615.0" />
+        <Label fx:id="label" layoutX="912.0" layoutY="106.0" minHeight="16" minWidth="69" />
+      <Label fx:id="cellSelected" layoutX="135.0" layoutY="632.0" />
+    </children>
+</AnchorPane>
