@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -34,11 +35,14 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label cellSelected;
     @FXML
+    private TextField cellText;
+    @FXML
     private TableView table;
     @FXML
     private Pane bPane;
     
     private Map<String, TableColumn<Row, String>> cols;
+    private TableColumn prev = null;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -49,6 +53,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         bPane.getStyleClass().add("bPane");
+        //cellSelected.getStyleClass().add("cellSelected");
         
         cols = new HashMap<>();
         TableColumn<Row, String> index = new TableColumn<>("index");
@@ -61,6 +66,7 @@ public class FXMLDocumentController implements Initializable {
         for(char i = 'A'; i <= 'D'; i++)
         {
             TableColumn<Row, String> inCol = new TableColumn<>(String.valueOf(i));
+            inCol.setId(String.valueOf(i));
             cols.put(String.valueOf(i), inCol);
             PropertyValueFactory<Row, String> inProp = new PropertyValueFactory<>(String.valueOf(i));
             inCol.setCellValueFactory(inProp);
@@ -76,14 +82,25 @@ public class FXMLDocumentController implements Initializable {
             table.getItems().add(r);
         }
         
-        ObservableList<TablePosition> selectedItems = table.getSelectionModel().getSelectedCells();
+        ObservableList<TablePosition> selectedCells = table.getSelectionModel().getSelectedCells();
 
-        selectedItems.addListener(new ListChangeListener<TablePosition>() {
+        selectedCells.addListener(new ListChangeListener<TablePosition>() {
           @Override
           public void onChanged(Change<? extends TablePosition> change) {
-            System.out.println("Row: "+ change.getList().get(0).getRow() + " Col: " + change.getList().get(0).getTableColumn().getText());
-            change.getList().get(0).getTableColumn().getStyleClass().add("table-row-cell");
-            //cellSelected.setText("cell: " +  change.getList().get(0).getTableColumn().getText() + change.getList().get(0).getRow());
+              if(!change.getList().get(0).getTableColumn().getId().equalsIgnoreCase("index"))
+              {
+                if(prev != null)
+                    prev.getStyleClass().clear();
+                
+                prev = change.getList().get(0).getTableColumn();
+                int row = Integer.valueOf(change.getList().get(0).getRow()) + 1;
+                String col = change.getList().get(0).getTableColumn().getText();
+                System.out.println(prev.getCellData(row - 1));
+                //System.out.println(change.getList().get(0).getTableColumn().getStyleableParent());
+                change.getList().get(0).getTableColumn().getStyleClass().add("table-row-cell");
+                change.getList().get(0).getTableColumn().getStyleClass().add("headerColor");
+                cellText.setText(col + row);
+              }
           }
         });
     }    

@@ -7,8 +7,11 @@ and open the template in the editor.
     Created on : 25/04/2020, 7:41:09 PM
     Author     : student
 */
+.column-header.headerColor {
+    -fx-background-color: gold;
+}
 
-.mytable .column-header{
+.high{
     -fx-background-color: greenyellow;
 }
 
@@ -17,10 +20,17 @@ and open the template in the editor.
     -fx-background-color: white;
     -fx-border-color: pink ;
     -fx-border-width: 5 ;
-    -fx-text-fill: black; 
+    -fx-text-fill: black;     
 }
 
 .bPane {
     -fx-background-color: linear-gradient(#9bc9f6, #278bec, #6ab3fc, #9bc1e5, #4e657b);
 /*    -fx-background-color: linear-gradient(#e66465, #9198e5);*/
+}
+
+.label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
