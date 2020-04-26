@@ -28,8 +28,19 @@ public class Row {
     private SimpleStringProperty B;
     private SimpleStringProperty C;
     private SimpleStringProperty D;
+    private SimpleStringProperty E;
+    private SimpleStringProperty F;
+    private SimpleStringProperty G;
+    private SimpleStringProperty H;
+    private SimpleStringProperty I;
+    private SimpleStringProperty J;
+    private SimpleStringProperty K;
     
-    private SimpleStringProperty[] cols = {this.A, this.B, this.C, this.D};
+    private SimpleStringProperty[] cols = {this.A, this.B, this.C, this.D,
+                                            this.E, this.F, this.G, this.H,
+                                            this.I, this.J, this.K};
+    
+    private boolean selected = false;
 
     public Row(String index) {
         this.index = index;
@@ -40,6 +51,7 @@ public class Row {
         }
     }
 
+    //getters
     public String getIndex() {
         return index;
     }
@@ -60,6 +72,43 @@ public class Row {
         return cols[3].get();
     }
 
+    public String getE()
+    {
+        return cols[4].get();
+    }
+
+    public String getF()
+    {
+        return cols[5].get();
+    }
+
+    public String getG()
+    {
+        return cols[6].get();
+    }
+
+    public String getH()
+    {
+        return cols[7].get();
+    }
+
+    public String getI()
+    {
+        return cols[8].get();
+    }
+
+    public String getJ()
+    {
+        return cols[9].get();
+    }
+
+    public String getK()
+    {
+        return cols[10].get();
+    }
+    
+
+    //setters
     public void setA(String A) {
         this.cols[0].set(A);
     }
@@ -75,5 +124,57 @@ public class Row {
     public void setD(String D) {
         this.cols[3].set(D);
     }
-  
+
+    public void setE(String E)
+    {
+        this.cols[4].set(E);
+    }
+
+    public void setF(String F)
+    {
+        this.cols[5].set(F);
+    }
+
+    public void setG(String G)
+    {
+        this.cols[6].set(G);
+    }
+
+    public void setH(String H)
+    {
+        this.cols[7].set(H);
+    }
+
+    public void setI(String I)
+    {
+        this.cols[8].set(I);
+    }
+
+    public void setJ(String J)
+    {
+        this.cols[9].set(J);
+    }
+
+    public void setK(String K)
+    {
+        this.cols[10].set(K);
+    }
+    
+    //row return index
+    public String toString()
+    {
+        return index;
+    }
+
+    //row selection
+    public boolean isSelected()
+    {
+        return selected;
+    }
+
+    public void setSelected(boolean isSelected)
+    {
+        this.selected = isSelected;
+    }
+    
 }

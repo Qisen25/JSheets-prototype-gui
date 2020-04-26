@@ -19,7 +19,7 @@ and open the template in the editor.
 .table-row-cell:selected{
     -fx-background-color: white;
     -fx-border-color: pink ;
-    -fx-border-width: 5 ;
+    -fx-border-width: 4 ;
     -fx-text-fill: black;     
 }
 
@@ -33,4 +33,21 @@ and open the template in the editor.
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+.list-cell:odd {
+    -fx-font-weight: bold;
+    -fx-control-inner-background:  #A6A6A6;
+    -fx-opacity: 1;
+}
+
+.list-cell:even {
+    -fx-font-weight: bold;
+    -fx-control-inner-background:  silver;
+    -fx-opacity: 1;
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-padding: -10;
 }
