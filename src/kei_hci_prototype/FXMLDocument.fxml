@@ -5,6 +5,9 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
@@ -13,10 +16,38 @@
       
       <Pane fx:id="bPane" layoutX="866.0" prefHeight="673.0" prefWidth="218.0">
          <children>
-              <Button fx:id="button" layoutY="65.0" onAction="#handleButtonAction" text="Click Me!" />
+            <Pane fx:id="filePane" layoutX="28.0" layoutY="38.0" prefHeight="126.0" prefWidth="134.0">
+               <children>
+                  <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                    <Button fx:id="openButton" layoutX="66.0" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="newButton" layoutX="1.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="exportButton" layoutY="87.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="printButton" layoutX="66.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+               </children>
+            </Pane>
+            <TitledPane animated="false" layoutX="29.0" layoutY="365.0" prefHeight="103.0" prefWidth="140.0" text="Tools">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </TitledPane>
+            <Pane fx:id="editPane" layoutX="29.0" layoutY="200.0" prefHeight="153.0" prefWidth="146.0">
+               <children>
+                  <Button fx:id="undoButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="redoButton" layoutX="65.0" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="cutButton" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="pasteButton" layoutY="88.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="copyButton" layoutX="65.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+               </children>
+            </Pane>
+            <Label fx:id="fileTitle" layoutX="29.0" layoutY="14.0" prefHeight="16.0" prefWidth="66.0" text="  File" />
+            <Label fx:id="editTitle" layoutX="29.0" layoutY="178.0" prefHeight="16.0" prefWidth="66.0" text="  Edit" />
+            <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="86.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../CSS/editPen.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
-        <Label fx:id="label" layoutX="912.0" layoutY="106.0" minHeight="16" minWidth="69" />
       <Label fx:id="cellSelected" layoutX="72.0" layoutY="632.0" text="Cells Selected:" />
       <TextField fx:id="cellText" layoutX="176.0" layoutY="627.0" prefHeight="26.0" prefWidth="89.0" />
       <Pane fx:id="spreadPane" prefHeight="603.0" prefWidth="861.0">
@@ -25,5 +56,8 @@
             <ListView fx:id="indexList" layoutX="-2.0" layoutY="27.0" prefHeight="561.0" prefWidth="53.0" />
          </children>
       </Pane>
+      <TextField layoutX="371.0" layoutY="627.0" promptText="Formula...." />
+      <TextField layoutX="625.0" layoutY="627.0" prefHeight="26.0" prefWidth="134.0" promptText="Find..." />
+      <Button fx:id="findButton" layoutX="759.0" layoutY="627.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" />
     </children>
 </AnchorPane>

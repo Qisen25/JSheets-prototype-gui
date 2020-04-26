@@ -14,12 +14,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
@@ -27,8 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.util.Callback;
+import javafx.scene.text.Text;
 
 /*
  * Class handling creation of spreadsheet views
@@ -38,36 +36,29 @@ import javafx.util.Callback;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
-    @FXML
     private AnchorPane anchor;
-    @FXML
-    private Label cellSelected;
     @FXML
     private TextField cellText;
     @FXML
     private TableView table;
     @FXML
-    private Pane bPane;
-    @FXML
-    private Pane spreadPane;
+    private Pane bPane, spreadPane, filePane, editPane;
     @FXML
     private ListView<Row> indexList;
+    @FXML
+    private Label fileTitle, editTitle, cellSelected;
+    @FXML
+    private Button saveButton, openButton, newButton, exportButton, printButton, 
+            undoButton, redoButton;
     
     private Map<String, TableColumn<Row, String>> cols;
     private TableColumn prev = null;
     private Row prevRow = null;
     
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        bPane.getStyleClass().add("bPane");//style side menu
         //cellSelected.getStyleClass().add("cellSelected");
+        setupSideMenuStyle();
         
         cols = new HashMap<>();
 //        TableColumn<Row, String> index = new TableColumn<>("index");
@@ -93,7 +84,7 @@ public class FXMLDocumentController implements Initializable {
         
         //initialise index and cells
         //indexList.getItems().add(" ");
-        for(int i = 1; i < 10; i++)
+        for(int i = 1; i <= 30; i++)
         {
             Row r = new Row(String.valueOf(i));
             table.getItems().add(r);
@@ -150,6 +141,16 @@ public class FXMLDocumentController implements Initializable {
         });
         
     }   
+    
+    private void setupSideMenuStyle()
+    {
+        this.bPane.getStyleClass().add("bPane");//style side menu
+        this.filePane.setStyle("-fx-background-color: orange;");
+        this.editPane.setStyle("-fx-background-color: orange;");
+        this.cellSelected.getStyleClass().add("myCellLabel");
+        this.fileTitle.getStyleClass().add("myTextStyle");
+        this.editTitle.getStyleClass().add("myTextStyle");
+    }
     
     /*
      *highlights index cell when cell is selected
