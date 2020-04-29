@@ -15,7 +15,36 @@ and open the template in the editor.
     -fx-font-size: 18px;
     -fx-font-weight: bold;
     -fx-border-color: orange;
-    -fx-background-color: orange, transparent;
+    -fx-background-color: linear-gradient(#EE5C10, #ECA986, #F29463);
+}
+
+#editTitle{
+    -fx-background-image: url('editPen.png');
+    -fx-background-position: right;
+    -fx-background-size: 25px 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-text-alignment: left;
+}
+
+#toolsTitle{
+    -fx-background-image: url('tool.png');
+    -fx-background-position: right;
+    -fx-background-size: 25px 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-text-alignment: left;
+}
+
+#AnchorPane {
+    -fx-background-color: #E4F0FF;
+}
+
+.accordion .titled-pane .title{
+    -fx-background-color: linear-gradient(#ECA986, #F29463);
+}
+
+.accordion .titled-pane .title:hover{
+    -fx-background-color: peachpuff;
+    -fx-scale-y: 1.1;
 }
 
 /**button setups*/
@@ -102,7 +131,7 @@ and open the template in the editor.
 }
 
  .button:hover {
-        -fx-background-color: #383838;
+        -fx-background-color: peachpuff;
         -fx-scale-y: 1.1;
 }
 
@@ -116,7 +145,6 @@ and open the template in the editor.
 
 .bPane {
     -fx-background-color: linear-gradient(#9bc9f6, #278bec, #6ab3fc, #9bc1e5, #4e657b);
-/*    -fx-background-color: linear-gradient(#e66465, #9198e5);*/
 }
 
 .myCellLabel {

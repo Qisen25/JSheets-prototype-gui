@@ -46,7 +46,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ListView<Row> indexList;
     @FXML
-    private Label fileTitle, editTitle, cellSelected;
+    private Label fileTitle, editTitle, cellSelected, toolsTitle;
     @FXML
     private Button saveButton, openButton, newButton, exportButton, printButton, 
             undoButton, redoButton;
@@ -145,11 +145,12 @@ public class FXMLDocumentController implements Initializable {
     private void setupSideMenuStyle()
     {
         this.bPane.getStyleClass().add("bPane");//style side menu
-        this.filePane.setStyle("-fx-background-color: orange;");
-        this.editPane.setStyle("-fx-background-color: orange;");
+        this.filePane.setStyle("-fx-background-color: #E97425;");
+        this.editPane.setStyle("-fx-background-color: #E97425;");
         this.cellSelected.getStyleClass().add("myCellLabel");
         this.fileTitle.getStyleClass().add("myTextStyle");
         this.editTitle.getStyleClass().add("myTextStyle");
+        this.toolsTitle.getStyleClass().add("myTextStyle");
     }
     
     /*
