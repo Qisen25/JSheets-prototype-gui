@@ -9,6 +9,8 @@ and open the template in the editor.
 */
 .column-header.headerColor {
     -fx-background-color: gold;
+    -fx-border-color: whitesmoke;
+    -fx-border-width: 1 ;
 }
 
 .myTextStyle{
@@ -136,10 +138,10 @@ and open the template in the editor.
 }
 
 /*table row selection highlight*/
-.table-row-cell:selected{
+.table-cell:selected{
     -fx-background-color: white;
     -fx-border-color: deeppink;
-    -fx-border-width: 3 ;
+    -fx-border-width: 2 ;
     -fx-text-fill: black;     
 }
 
