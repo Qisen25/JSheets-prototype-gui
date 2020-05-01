@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.animation.KeyFrame;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
@@ -44,13 +45,13 @@ public class FXMLDocumentController implements Initializable
 {
 
     @FXML
-    private AnchorPane anchor;
+    private AnchorPane anchor, spreadPane;
     @FXML
     private TextField cellText;
     @FXML
     private TableView table;
     @FXML
-    private Pane bPane, spreadPane, filePane, editPane;
+    private Pane bPane, filePane, editPane;
     @FXML
     private ListView<Row> indexList;
     @FXML
@@ -63,6 +64,8 @@ public class FXMLDocumentController implements Initializable
     private TableColumn prev = null;
     private Row prevRow = null;
     private ObservableList<Row> rowz;
+    private  ScrollBar s1, s2;
+    private double sc = 0.0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -175,8 +178,8 @@ public class FXMLDocumentController implements Initializable
         {
             if (newScene != null)
             {
-                ScrollBar s1 = (ScrollBar) indexList.lookup(".scroll-bar");
-                ScrollBar s2 = (ScrollBar) table.lookup(".scroll-bar");
+                s1 = (ScrollBar) indexList.lookup(".scroll-bar");
+                s2 = (ScrollBar) table.lookup(".scroll-bar");
 
                 s1.valueProperty().bindBidirectional(s2.valueProperty());
             }
@@ -260,8 +263,40 @@ public class FXMLDocumentController implements Initializable
                 }
 
             });
+            
+//            setOnMouseDragEntered(new EventHandler<MouseDragEvent>() {
+//            @Override
+//                public void handle(MouseDragEvent t)
+//                {         
+//                        s2.setValue(s2.getValue() + 0.1);
+//                        System.out.println(s2.getValue());
+//
+//                }
+//
+//            });
+
+//            setOnDragOver(new EventHandler<DragEvent>() {
+//                @Override
+//                public void handle(DragEvent t)
+//                {         
+//                        s2.setValue(s2.getValue() + 0.2);
+//                        System.out.println(s2.getValue());
+//                }
+//            });
+
+            //scroll slight after each cell selection
+            setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent t)
+                {
+                    s2.setValue(s2.getValue() + 0.005);
+                    System.out.println(s2.getValue());
+                }
+            });
 
         }
+        
+        
 
         @Override
         public void updateItem(String item, boolean empty)
