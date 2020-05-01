@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author student
+ * @author Kei Wang 19126089
  */
 public class Kei_HCI_Prototype extends Application {
     

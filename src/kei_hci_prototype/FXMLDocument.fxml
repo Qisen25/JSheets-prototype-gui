@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="672.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kei_hci_prototype.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="anchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="672.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kei_hci_prototype.FXMLDocumentController">
     <children>
       
-      <Pane fx:id="bPane" layoutX="866.0" prefHeight="673.0" prefWidth="218.0">
+      <Pane fx:id="bPane" layoutX="866.0" prefHeight="673.0" prefWidth="218.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane fx:id="filePane" layoutX="28.0" layoutY="38.0" prefHeight="126.0" prefWidth="134.0">
                <children>
@@ -69,16 +69,16 @@
             <StackPane layoutX="82.0" layoutY="362.0" prefHeight="34.0" prefWidth="34.0" />
          </children>
       </Pane>
-      <Label fx:id="cellSelected" layoutX="72.0" layoutY="632.0" text="Cells Selected:" />
-      <TextField fx:id="cellText" layoutX="176.0" layoutY="627.0" prefHeight="26.0" prefWidth="89.0" />
-      <Pane fx:id="spreadPane" prefHeight="603.0" prefWidth="861.0">
+      <Label fx:id="cellSelected" layoutX="72.0" layoutY="632.0" text="Cells Selected:" AnchorPane.bottomAnchor="24.0" />
+      <TextField fx:id="cellText" layoutX="176.0" layoutY="627.0" prefHeight="26.0" prefWidth="89.0" AnchorPane.bottomAnchor="19.0" />
+      <AnchorPane fx:id="spreadPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="0.0" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="223.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="table" layoutX="51.0" prefHeight="603.0" prefWidth="811.0" />
-            <ListView fx:id="indexList" layoutX="-2.0" layoutY="27.0" prefHeight="561.0" prefWidth="53.0" />
+            <TableView fx:id="table" layoutX="51.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="603.0" prefWidth="811.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ListView fx:id="indexList" layoutX="-2.0" layoutY="27.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="561.0" prefWidth="53.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="27.0" />
          </children>
-      </Pane>
-      <TextField layoutX="371.0" layoutY="627.0" promptText="Formula...." />
-      <TextField layoutX="625.0" layoutY="627.0" prefHeight="26.0" prefWidth="134.0" promptText="Find..." />
-      <Button fx:id="findButton" layoutX="759.0" layoutY="627.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" />
+      </AnchorPane>
+      <TextField layoutX="371.0" layoutY="627.0" promptText="Formula...." AnchorPane.bottomAnchor="19.0" />
+      <TextField layoutX="625.0" layoutY="627.0" prefHeight="26.0" prefWidth="134.0" promptText="Find..." AnchorPane.bottomAnchor="19.0" />
+      <Button fx:id="findButton" layoutX="759.0" layoutY="627.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" AnchorPane.bottomAnchor="19.0" />
     </children>
 </AnchorPane>

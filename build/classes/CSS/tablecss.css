@@ -139,7 +139,14 @@ and open the template in the editor.
 .table-row-cell:selected{
     -fx-background-color: white;
     -fx-border-color: deeppink;
-    -fx-border-width: 4 ;
+    -fx-border-width: 3 ;
+    -fx-text-fill: black;     
+}
+
+.table-cell:hover{
+    -fx-background-color: white;
+    -fx-border-color: pink;
+    -fx-border-width: 3 ;
     -fx-text-fill: black;     
 }
 
