@@ -7,9 +7,9 @@ package kei_hci_prototype;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javafx.animation.KeyFrame;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
@@ -28,7 +28,6 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -61,10 +60,10 @@ public class FXMLDocumentController implements Initializable
             undoButton, redoButton;
 
     private Map<String, TableColumn<Row, String>> cols;
-    private TableColumn prev = null;
+    private TableColumn prevCol = null;
     private Row prevRow = null;
     private ObservableList<Row> rowz;
-    private  ScrollBar s1, s2;
+    private  ScrollBar s1, verti, horiz;
     private double sc = 0.0;
 
     @Override
@@ -128,7 +127,7 @@ public class FXMLDocumentController implements Initializable
                 //go through current positions selected
                 for (TablePosition t : change.getList())
                 {
-                    prev = t.getTableColumn();
+                    prevCol = t.getTableColumn();
                     //iterated values
                     int lastRow = Integer.valueOf(t.getRow()) + 1;
                     String lastCol = t.getTableColumn().getText();
@@ -139,8 +138,8 @@ public class FXMLDocumentController implements Initializable
                     //System.out.println(prev.getCellData(row - 1));
                     //System.out.println(change.getList().get(0));
 
-                    prev.getStyleClass().add("table-row-cell");//highlight actual cell selected
-                    prev.getStyleClass().add("headerColor");//highlight column header when select
+                    prevCol.getStyleClass().add("table-row-cell");//highlight actual cell selected
+                    prevCol.getStyleClass().add("headerColor");//highlight column header when select
                     cellText.setText(lastCol + lastRow);
                     if (change.getList().size() > 1)
                     {
@@ -178,10 +177,22 @@ public class FXMLDocumentController implements Initializable
         {
             if (newScene != null)
             {
-                s1 = (ScrollBar) indexList.lookup(".scroll-bar");
-                s2 = (ScrollBar) table.lookup(".scroll-bar");
+                s1 = (ScrollBar) indexList.lookup(".scroll-bar:vertical");
+                verti = (ScrollBar) table.lookup(".scroll-bar:vertical");
+                
+                //find horizontal scroll bar
+                Iterator barIter = table.lookupAll(".scroll-bar:horizontal").iterator();
+                barIter.next();
+                horiz = (ScrollBar) barIter.next();
+                System.out.println(horiz.orientationProperty());
+                
+//                for(Node n : table.lookupAll(".scroll-bar:horizontal"))
+//                {
+//                    ScrollBar h = (ScrollBar) n;
+//                    System.out.println(h.orientationProperty());
+//                }
 
-                s1.valueProperty().bindBidirectional(s2.valueProperty());
+                s1.valueProperty().bindBidirectional(verti.valueProperty());
             }
         });
 
@@ -240,10 +251,11 @@ public class FXMLDocumentController implements Initializable
         This class allows for mouse drag selection of cells
         Solution from oracle community
      */
-    public class DragSelectionCell extends TableCell<Row, String>
+    private class DragSelectionCell extends TableCell<Row, String>
     {
         public DragSelectionCell()
         {
+            //listeners for dragging for cell selection
             setOnDragDetected(new EventHandler<MouseEvent>()
             {
                 @Override
@@ -259,45 +271,49 @@ public class FXMLDocumentController implements Initializable
                 @Override
                 public void handle(MouseDragEvent event)
                 {
-                    getTableColumn().getTableView().getSelectionModel().select(getIndex(), getTableColumn());
+                    getTableColumn().getTableView().getSelectionModel().select(getIndex(), getTableColumn()); 
+                    
                 }
 
             });
-            
-//            setOnMouseDragEntered(new EventHandler<MouseDragEvent>() {
-//            @Override
-//                public void handle(MouseDragEvent t)
-//                {         
-//                        s2.setValue(s2.getValue() + 0.1);
-//                        System.out.println(s2.getValue());
-//
-//                }
-//
-//            });
 
-//            setOnDragOver(new EventHandler<DragEvent>() {
-//                @Override
-//                public void handle(DragEvent t)
-//                {         
-//                        s2.setValue(s2.getValue() + 0.2);
-//                        System.out.println(s2.getValue());
-//                }
-//            });
-
-            //scroll slight after each cell selection
+            //scroll slightly after each cell selection
             setOnMouseDragged(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t)
                 {
-                    s2.setValue(s2.getValue() + 0.005);
-                    System.out.println(s2.getValue());
+                    //change in direction of mouse movement
+                    double xChange = t.getSceneX() - (horiz.getMax()- 50);
+                    double yChange = t.getSceneY() - (verti.getHeight() - 200.0);//take 200 allow scroll before reach edge
+                    
+                    //vertical scroll down
+                    if(verti.getValue() <= verti.getHeight() && yChange > 0.0)
+                    {
+                        verti.setValue(verti.getValue() + 0.01);
+                    }
+                    //scroll up
+                    else if(verti.getValue() >= verti.getMinHeight() && yChange < 0.0)
+                    {
+                        verti.setValue(verti.getValue() - 0.01);
+                    }
+                    //horizontal scroll to right.
+                    if(horiz.getValue() <= horiz.getMax() && xChange > 0.0)
+                    {
+                        horiz.setValue(horiz.getValue() + 1.0);
+                    }
+                    //horizontal scroll to left
+                    else if(horiz.getValue() >= horiz.getMinWidth() && xChange < 0.0)
+                    {
+                        horiz.setValue(horiz.getValue() - 1.0);
+                    }
+                    
+                    System.out.println(t.getSceneX() + " - " + horiz.getWidth() + " = " + xChange + "x.getVal " + horiz.getValue());
+                    
                 }
             });
 
         }
         
-        
-
         @Override
         public void updateItem(String item, boolean empty)
         {
@@ -313,15 +329,13 @@ public class FXMLDocumentController implements Initializable
         }
     }
 
-    public class DragSelectionCellFactory implements Callback<TableColumn<Row, String>, TableCell<Row, String>>
+    private class DragSelectionCellFactory implements Callback<TableColumn<Row, String>, TableCell<Row, String>>
     {
-
         @Override
         public TableCell<Row, String> call(final TableColumn<Row, String> col)
         {
             return new DragSelectionCell();
         }
-
     }
 
 }
