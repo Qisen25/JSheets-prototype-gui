@@ -28,6 +28,7 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -36,7 +37,7 @@ import javafx.util.Callback;
 
 /*
  * Class handling creation of spreadsheet views
- * REFERENCES: stackoverflow and javafx docs use to help set up listeners and views
+ * REFERENCES: stackoverflow and javafx docs were used to help set up listeners and views.
  *             for drag cell selection https://community.oracle.com/message/11334815#11334815
  *@author   Kei Wang 19126089
  */
@@ -83,22 +84,23 @@ public class FXMLDocumentController implements Initializable
         for (char i = 'A'; i <= 'K'; i++)
         {
             TableColumn<Row, String> inCol = new TableColumn<>(String.valueOf(i));
-            inCol.setId(String.valueOf(i));
-            cols.put(String.valueOf(i), inCol);//put in a set? maybe remove this soon
+            inCol.setId(String.valueOf(i)); 
             PropertyValueFactory<Row, String> inProp = new PropertyValueFactory<>(String.valueOf(i));
             Callback<TableColumn<Row, String>, TableCell<Row, String>> cellFactory = new DragSelectionCellFactory();
             inCol.setCellFactory(cellFactory);
             inCol.setCellValueFactory(inProp);
             table.getColumns().add(inCol);//add columns to table
             inCol.setMinWidth(100.0);//set cell size to atleast 100
+            cols.put(String.valueOf(i), inCol);
         }
 
         //initialise index list view
-        for (int i = 1; i <= 30; i++)
+        for (int i = 0; i <= 30; i++)
         {
             Row r = new Row(String.valueOf(i));
             table.getItems().add(r);
             indexList.getItems().add(r);//String.valueOf(i));
+            //table.getSelectionModel().select(r);
         }
 
         //set up table listeners
@@ -108,6 +110,8 @@ public class FXMLDocumentController implements Initializable
         table.getSelectionModel().setCellSelectionEnabled(true);//use cell selection model
 
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
+        
 
         //listen for change in cell selection
         selectedCells.addListener(new ListChangeListener<TablePosition>()
@@ -129,14 +133,11 @@ public class FXMLDocumentController implements Initializable
                 {
                     prevCol = t.getTableColumn();
                     //iterated values
-                    int lastRow = Integer.valueOf(t.getRow()) + 1;
+                    int lastRow = Integer.valueOf(t.getRow());
                     String lastCol = t.getTableColumn().getText();
                     //get beginning cell
-                    int startRow = Integer.valueOf(change.getList().get(0).getRow()) + 1;
+                    int startRow = Integer.valueOf(change.getList().get(0).getRow());
                     String startCol = change.getList().get(0).getTableColumn().getText();
-                    
-                    //System.out.println(prev.getCellData(row - 1));
-                    //System.out.println(change.getList().get(0));
 
                     prevCol.getStyleClass().add("table-row-cell");//highlight actual cell selected
                     prevCol.getStyleClass().add("headerColor");//highlight column header when select
@@ -184,7 +185,7 @@ public class FXMLDocumentController implements Initializable
                 Iterator barIter = table.lookupAll(".scroll-bar:horizontal").iterator();
                 barIter.next();
                 horiz = (ScrollBar) barIter.next();
-                System.out.println(horiz.orientationProperty());
+                //System.out.println(horiz.orientationProperty());
                 
 //                for(Node n : table.lookupAll(".scroll-bar:horizontal"))
 //                {
@@ -193,6 +194,33 @@ public class FXMLDocumentController implements Initializable
 //                }
 
                 s1.valueProperty().bindBidirectional(verti.valueProperty());
+            }
+        });
+        
+        cellText.setOnKeyReleased(new EventHandler<KeyEvent>() 
+        {
+            @Override
+            public void handle(KeyEvent t)
+            {
+                String getText = cellText.getText();
+
+                System.out.println(getText);
+                if(getText.length() >= 2 && !getText.contains(":") && t.getCode().equals(t.getCode().ENTER))
+                {
+                    int rowNum = Integer.valueOf(getText.substring(1));
+                    String colId = String.valueOf(getText.charAt(0));
+
+                    if(rowNum < 0)
+                        rowNum = 0;
+
+                    table.getSelectionModel().clearSelection();
+                    System.out.println("Hey I'm a cell " + getText.length());
+                    table.getSelectionModel().select(rowNum, cols.get(colId));
+                }
+                else if(getText.length() == 4)
+                {
+                    System.out.println("Hey I'm a bunch of cells");
+                }
             }
         });
 
@@ -299,12 +327,12 @@ public class FXMLDocumentController implements Initializable
                     //horizontal scroll to right.
                     if(horiz.getValue() <= horiz.getMax() && xChange > 0.0)
                     {
-                        horiz.setValue(horiz.getValue() + 1.0);
+                        horiz.setValue(horiz.getValue() + 0.95);
                     }
                     //horizontal scroll to left
                     else if(horiz.getValue() >= horiz.getMinWidth() && xChange < 0.0)
                     {
-                        horiz.setValue(horiz.getValue() - 1.0);
+                        horiz.setValue(horiz.getValue() - 0.95);
                     }
                     
                     System.out.println(t.getSceneX() + " - " + horiz.getWidth() + " = " + xChange + "x.getVal " + horiz.getValue());
