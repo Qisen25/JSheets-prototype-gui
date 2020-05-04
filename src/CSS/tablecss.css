@@ -197,5 +197,16 @@ and open the template in the editor.
 }
 
 #mathPane, #chartPane{
-    -fx-background-color: linear-gradient(#9bc9f6, #278bec, #6ab3fc, #9bc1e5, #4e657b);
+    -fx-background-color: linear-gradient(#4e657b, #278bec, #6ab3fc, #278bec, #4e657b);
+}
+
+#Logo {
+    -fx-font-family: "Courier New";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-background-image: url('logo.png');
+/*    -fx-background-size: 25px 25px;*/
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }

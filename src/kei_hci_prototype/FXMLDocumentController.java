@@ -36,6 +36,7 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.util.Callback;
 
 /*
@@ -48,20 +49,20 @@ public class FXMLDocumentController implements Initializable
 {
 
     @FXML
-    private AnchorPane anchor, spreadPane;
+    private AnchorPane anchor, spreadPane, bPane;
     @FXML
     private TextField cellText;
     @FXML
     private TableView table;
     @FXML
-    private Pane bPane, filePane, editPane;
+    private Pane filePane, editPane;
     @FXML
     private ListView<Row> indexList;
     @FXML
-    private Label fileTitle, editTitle, cellSelected, toolsTitle;
+    private Label fileTitle, editTitle, cellSelected, toolsTitle, Logo;
     @FXML
     private Button saveButton, openButton, newButton, exportButton, printButton,
-            undoButton, redoButton;
+            undoButton, redoButton, copyButton, cutButton, pasteButton;
 
     private Map<String, TableColumn<Row, String>> cols;
     private TableColumn prevCol = null;
@@ -74,7 +75,7 @@ public class FXMLDocumentController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         setupSideMenuStyle();
-        setupButtonTooltip();
+        setupTooltips();
 
         cols = new HashMap<>();
 //        TableColumn<Row, String> index = new TableColumn<>("index");
@@ -283,9 +284,25 @@ public class FXMLDocumentController implements Initializable
         this.toolsTitle.getStyleClass().add("myTextStyle");
     }
     
-    private void setupButtonTooltip()
+    private void setupTooltips()
     {
+        //buttons
         this.saveButton.setTooltip(new Tooltip("Save\nCTRL + S"));
+        this.openButton.setTooltip(new Tooltip("Open\nCTRL + O"));
+        this.newButton.setTooltip(new Tooltip("New\nCTRL + N"));
+        this.printButton.setTooltip(new Tooltip("Print\nCTRL + P"));
+        this.exportButton.setTooltip(new Tooltip("Export\nCTRL + E"));
+        this.undoButton.setTooltip(new Tooltip("Undo\nCTRL + Z"));
+        this.redoButton.setTooltip(new Tooltip("Redo\nCTRL + Y"));
+        this.copyButton.setTooltip(new Tooltip("Copy\nCTRL + C"));
+        this.cutButton.setTooltip(new Tooltip("Cut\nCTRL + X"));
+        this.pasteButton.setTooltip(new Tooltip("Paste\nCTRL + V"));
+        
+        //text field
+        cellText.setTooltip(new Tooltip("Enter to select cell positions\n" + 
+                                        "For single selection type a letter followed by number eg. A1\n" + 
+                                        "For range selection follow this format A1:A20 and replace letters and numbers to suit you\n" +
+                                        "Press enter when selection is ready."));
     }
 
     /*
@@ -447,6 +464,8 @@ public class FXMLDocumentController implements Initializable
                     System.out.println(t.getSceneX() + " - " + horiz.getWidth() + " = " + xChange + "x.getVal " + horiz.getValue());                   
                 }
             });
+            
+            cell.setTooltip(new Tooltip("Tip.\n double click to begin editing cell\n Press enter to set changes"));
             
             return cell;
         }
