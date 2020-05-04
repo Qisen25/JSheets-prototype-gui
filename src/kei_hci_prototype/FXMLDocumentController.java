@@ -24,10 +24,13 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
@@ -71,6 +74,7 @@ public class FXMLDocumentController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         setupSideMenuStyle();
+        setupButtonTooltip();
 
         cols = new HashMap<>();
 //        TableColumn<Row, String> index = new TableColumn<>("index");
@@ -79,6 +83,7 @@ public class FXMLDocumentController implements Initializable
 //        PropertyValueFactory<Row, String> prop = new PropertyValueFactory<>("index");
 //        index.setCellValueFactory(prop);
 //        table.getColumns().add(index);
+        table.setEditable(true);
 
         //set columns headers for table
         for (char i = 'A'; i <= 'K'; i++)
@@ -86,10 +91,11 @@ public class FXMLDocumentController implements Initializable
             TableColumn<Row, String> inCol = new TableColumn<>(String.valueOf(i));
             inCol.setId(String.valueOf(i)); 
             PropertyValueFactory<Row, String> inProp = new PropertyValueFactory<>(String.valueOf(i));
-            Callback<TableColumn<Row, String>, TableCell<Row, String>> cellFactory = new DragSelectionCellFactory();
+            Callback<TableColumn<Row, String>, TableCell<Row, String>> cellFactory = new DragSelectionCellFactory(TextFieldTableCell.forTableColumn());
             inCol.setCellFactory(cellFactory);
             inCol.setCellValueFactory(inProp);
-            table.getColumns().add(inCol);//add columns to table
+            setupColForEdit(inCol);
+            table.getColumns().add(inCol);//add columns to table            
             inCol.setMinWidth(100.0);//set cell size to atleast 100
             cols.put(String.valueOf(i), inCol);
         }
@@ -139,6 +145,8 @@ public class FXMLDocumentController implements Initializable
                     int startRow = Integer.valueOf(change.getList().get(0).getRow());
                     String startCol = change.getList().get(0).getTableColumn().getText();
 
+                    System.out.println(t.getTableColumn().getCellData(lastRow));
+                    
                     prevCol.getStyleClass().add("table-row-cell");//highlight actual cell selected
                     prevCol.getStyleClass().add("headerColor");//highlight column header when select
                     cellSelected.setText("Cells Selected: " + lastCol + lastRow);
@@ -274,6 +282,11 @@ public class FXMLDocumentController implements Initializable
         this.editTitle.getStyleClass().add("myTextStyle");
         this.toolsTitle.getStyleClass().add("myTextStyle");
     }
+    
+    private void setupButtonTooltip()
+    {
+        this.saveButton.setTooltip(new Tooltip("Save\nCTRL + S"));
+    }
 
     /*
      *highlights index cell when cell is selected
@@ -303,7 +316,7 @@ public class FXMLDocumentController implements Initializable
                         setStyle("-fx-control-inner-background: gold;"
                                 + "-fx-border-width: 1 ;"
                                 + "-fx-alignment: center;"
-                                + "-fx-cell-size: 26;"
+                                + "-fx-cell-size: 34px;"
                                 + "-fx-border-color: whitesmoke;");
                     }
                 }
@@ -311,40 +324,98 @@ public class FXMLDocumentController implements Initializable
             }
         });
     }
+    
+    /*
+        Setup up each column to listen for cell value change
+    */
+    private void setupColForEdit(TableColumn<Row, String> editCol)
+    {
+        editCol.setOnEditCommit(cellEditHandler -> {
+            Row changeRow = (Row) table.getItems().get(cellEditHandler.getTablePosition().getRow());
+            char colIdx = cellEditHandler.getTableColumn().getId().charAt(0);
+            String newVal = cellEditHandler.getNewValue();   
+            switch(colIdx)
+            {
+                case 'A':
+                    changeRow.setA(newVal);
+                    break;
+                case 'B':
+                    changeRow.setB(newVal);
+                    break;
+                case 'C':
+                    changeRow.setC(newVal);
+                    break;
+                case 'D':
+                    changeRow.setD(newVal);
+                    break;
+                case 'E':
+                    changeRow.setE(newVal);
+                    break;
+                case 'F':
+                    changeRow.setF(newVal);
+                    break;
+                case 'G':
+                    changeRow.setG(newVal);
+                    break;
+                case 'H':
+                    changeRow.setH(newVal);
+                    break;
+                case 'I':
+                    changeRow.setI(newVal);
+                    break;    
+                case 'J':
+                    changeRow.setJ(newVal);
+                    break;    
+                case 'K':
+                    changeRow.setK(newVal);
+                    break; 
+            }
+        });
+    }
 
     /*
         Reference: https://community.oracle.com/message/11334815#11334815
-        This class allows for mouse drag selection of cells
+        This decorator class allows for mouse drag selection and input of cells
+        Constructor takes in an existing cellFactory and decorates it for cell drag
         Solution from oracle community
      */
-    private class DragSelectionCell extends TableCell<Row, String>
+    private class DragSelectionCellFactory implements Callback<TableColumn<Row, String>, TableCell<Row, String>>
     {
-        public DragSelectionCell()
+        private final Callback<TableColumn<Row, String>, TableCell<Row, String>> factory ;
+
+        public DragSelectionCellFactory(Callback<TableColumn<Row,String>, TableCell<Row, String>> factory) {
+            this.factory = factory ;
+        }
+    
+        @Override
+        public TableCell<Row, String> call(TableColumn<Row, String> col)
         {
+            TableCell<Row, String> cell = this.factory.call(col);
+            
             //listeners for dragging for cell selection
-            setOnDragDetected(new EventHandler<MouseEvent>()
+            cell.setOnDragDetected(new EventHandler<MouseEvent>()
             {
                 @Override
                 public void handle(MouseEvent event)
                 {
-                    startFullDrag();
-                    getTableColumn().getTableView().getSelectionModel().select(getIndex(), getTableColumn());
+                    cell.startFullDrag();
+                    cell.getTableColumn().getTableView().getSelectionModel().select(cell.getIndex(), cell.getTableColumn());
                 }
             });
-            setOnMouseDragEntered(new EventHandler<MouseDragEvent>()
+            cell.setOnMouseDragEntered(new EventHandler<MouseDragEvent>()
             {
 
                 @Override
                 public void handle(MouseDragEvent event)
                 {
-                    getTableColumn().getTableView().getSelectionModel().select(getIndex(), getTableColumn()); 
+                    cell.getTableColumn().getTableView().getSelectionModel().select(cell.getIndex(), cell.getTableColumn()); 
                     
                 }
 
             });
 
             //scroll slightly after each cell selection
-            setOnMouseDragged(new EventHandler<MouseEvent>() {
+            cell.setOnMouseDragged(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t)
                 {
@@ -373,34 +444,11 @@ public class FXMLDocumentController implements Initializable
                         horiz.setValue(horiz.getValue() - 0.95);
                     }
                     
-                    System.out.println(t.getSceneX() + " - " + horiz.getWidth() + " = " + xChange + "x.getVal " + horiz.getValue());
-                    
+                    System.out.println(t.getSceneX() + " - " + horiz.getWidth() + " = " + xChange + "x.getVal " + horiz.getValue());                   
                 }
             });
-
-        }
-        
-        @Override
-        public void updateItem(String item, boolean empty)
-        {
-            super.updateItem(item, empty);
-            if (empty)
-            {
-                setText(null);
-            }
-            else
-            {
-                setText(item);
-            }
-        }
-    }
-
-    private class DragSelectionCellFactory implements Callback<TableColumn<Row, String>, TableCell<Row, String>>
-    {
-        @Override
-        public TableCell<Row, String> call(final TableColumn<Row, String> col)
-        {
-            return new DragSelectionCell();
+            
+            return cell;
         }
     }
 

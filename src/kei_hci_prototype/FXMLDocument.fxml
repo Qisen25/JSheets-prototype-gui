@@ -21,7 +21,7 @@
             <Pane fx:id="filePane" layoutX="28.0" layoutY="25.0" prefHeight="126.0" prefWidth="134.0">
                <children>
                   <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
-                    <Button fx:id="openButton" layoutX="66.0" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="openButton" layoutX="66.0" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="newButton" layoutX="1.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="exportButton" layoutY="87.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="printButton" layoutX="66.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
@@ -44,13 +44,13 @@
                     <content>
                       <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="206.0">
                            <children>
-                              <ScrollPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="84.0" prefWidth="200.0">
+                              <ScrollPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="84.0" prefWidth="208.0">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="203.0" prefWidth="200.0">
+                                  <AnchorPane fx:id="chartPane" minHeight="0.0" minWidth="0.0" prefHeight="203.0" prefWidth="200.0">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Pie" />
-                                          <Button layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Histogram" />
-                                          <Button layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Line" />
+                                          <Button layoutX="3.0" layoutY="3.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Pie" />
+                                          <Button layoutX="3.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Histogram" />
+                                          <Button layoutX="3.0" layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Line" />
                                        </children>
                                     </AnchorPane>
                                 </content>
@@ -62,17 +62,17 @@
                   <content>
                     <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="200.0">
                            <children>
-                              <ScrollPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="90.0" prefWidth="200.0">
+                              <ScrollPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="90.0" prefWidth="208.0">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="200.0">
+                                  <AnchorPane fx:id="mathPane" minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="200.0">
                                        <children>
                                           <Button layoutX="3.0" layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Sum" />
                                           <Button layoutX="3.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Product" />
                                           <Button layoutX="3.0" layoutY="100.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Average" />
-                                          <Button layoutX="3.0" layoutY="130.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Min" />
-                                          <Button layoutX="3.0" layoutY="190.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Range" />
-                                          <Button layoutX="3.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Max" />
-                                          <MenuButton layoutX="3.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Rounding">
+                                          <Button layoutX="3.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Min" />
+                                          <Button layoutX="3.0" layoutY="200.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Range" />
+                                          <Button layoutX="3.0" layoutY="168.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Max" />
+                                          <MenuButton layoutX="3.0" layoutY="3.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Rounding">
                                             <items>
                                               <MenuItem mnemonicParsing="false" text="Bankers Rounding" />
                                               <MenuItem mnemonicParsing="false" text="Round Whole" />
@@ -87,12 +87,26 @@
                 </TitledPane>
                 <TitledPane animated="false" text="Sort">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane prefHeight="85.0" prefWidth="208.0">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                                </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
                   </content>
                 </TitledPane>
                 <TitledPane animated="false" prefHeight="183.0" prefWidth="118.0" text="Time">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane prefHeight="88.0" prefWidth="208.0">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                                </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
                   </content>
                 </TitledPane>
                   <TitledPane animated="false" prefHeight="156.0" prefWidth="118.0" text="Quick Click">

@@ -152,15 +152,31 @@ and open the template in the editor.
     -fx-text-fill: black;     
 }
 
+.table-cell{
+    -fx-border-color: #989898;
+    -fx-border-width: 1 ;    
+}
+
+.table-row-cell{
+    -fx-cell-size: 35px ; 
+}
+
+/*side menu color*/
 .bPane {
     -fx-background-color: linear-gradient(#9bc9f6, #278bec, #6ab3fc, #9bc1e5, #4e657b);
 }
 
+/*cell selected label*/
 .myCellLabel {
     -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+/*index header cells*/
+.list-cell{
+    -fx-cell-size: 35px ;
 }
 
 .list-cell:odd {
@@ -178,4 +194,8 @@ and open the template in the editor.
 .list-view .scroll-bar:vertical {
     -fx-opacity: 0;
     -fx-padding: -10;
+}
+
+#mathPane, #chartPane{
+    -fx-background-color: linear-gradient(#9bc9f6, #278bec, #6ab3fc, #9bc1e5, #4e657b);
 }
