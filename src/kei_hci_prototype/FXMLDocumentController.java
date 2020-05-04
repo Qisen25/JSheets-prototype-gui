@@ -141,10 +141,10 @@ public class FXMLDocumentController implements Initializable
 
                     prevCol.getStyleClass().add("table-row-cell");//highlight actual cell selected
                     prevCol.getStyleClass().add("headerColor");//highlight column header when select
-                    cellText.setText(lastCol + lastRow);
+                    cellSelected.setText("Cells Selected: " + lastCol + lastRow);
                     if (change.getList().size() > 1)
                     {
-                        cellText.setText(startCol + startRow + ":" + lastCol + lastRow);
+                        cellSelected.setText("Cells Selected: " + startCol + startRow + ":" + lastCol + lastRow);
                     }
                 }
 
@@ -202,24 +202,62 @@ public class FXMLDocumentController implements Initializable
             @Override
             public void handle(KeyEvent t)
             {
-                String getText = cellText.getText();
-
-                System.out.println(getText);
-                if(getText.length() >= 2 && !getText.contains(":") && t.getCode().equals(t.getCode().ENTER))
+                try
                 {
-                    int rowNum = Integer.valueOf(getText.substring(1));
-                    String colId = String.valueOf(getText.charAt(0));
+                    String getText = cellText.getText().toUpperCase();
 
-                    if(rowNum < 0)
-                        rowNum = 0;
+                    //System.out.println(getText);
+                    if(getText.equals("ALL"))
+                    {
+                        table.getSelectionModel().selectAll();
+                    }
+                    else if(getText.length() >= 2 && !getText.contains(":") && t.getCode().equals(t.getCode().ENTER))
+                    {
+                        int rowNum = Integer.valueOf(getText.substring(1));
+                        String colId = String.valueOf(getText.charAt(0));
 
-                    table.getSelectionModel().clearSelection();
-                    System.out.println("Hey I'm a cell " + getText.length());
-                    table.getSelectionModel().select(rowNum, cols.get(colId));
+                        if(rowNum >= 0 && cols.containsKey(colId) && rowNum <= indexList.getItems().size())
+                        {
+                            table.getSelectionModel().clearSelection();
+                            //System.out.println("Hey I'm a cell " + getText.length());
+                            table.getSelectionModel().select(rowNum, cols.get(colId));
+                        }
+                        else
+                        {
+                            throw new NumberFormatException("invalid row index: " + rowNum);
+                        }
+                    }
+                    else if(getText.length() >= 5 && getText.contains(":") && t.getCode().equals(t.getCode().ENTER))
+                    {
+                        System.out.println("Hey I'm a bunch of cells");            
+                        String startCol, endCol;
+                        int startRow, endRow;
+                        String[] strArr = getText.split(":");
+
+                        startCol = strArr[0].substring(0,1);
+                        endCol = strArr[1].substring(0,1);
+                        startRow = Integer.valueOf(strArr[0].substring(1));
+                        endRow = Integer.valueOf(strArr[1].substring(1));
+
+                        if(cols.containsKey(startCol) && cols.containsKey(endCol))
+                        {
+                            if(startRow <= indexList.getItems().size() && 
+                                    endRow <= indexList.getItems().size() && startRow >= 0 && endRow >= 0)
+                            {
+                                table.getSelectionModel().clearSelection();
+                                table.getSelectionModel().selectRange(startRow, cols.get(startCol), endRow, cols.get(endCol));
+                            }
+                            else
+                            {
+                                throw new NumberFormatException("invalid bunch row index");
+                            }                      
+                        }
+                    }
                 }
-                else if(getText.length() == 4)
+                catch(NumberFormatException e)
                 {
-                    System.out.println("Hey I'm a bunch of cells");
+                    cellText.setText("Invalid cells");
+                    System.out.println("Error: " + e.getMessage());
                 }
             }
         });
