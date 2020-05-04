@@ -14,7 +14,7 @@ and open the template in the editor.
 }
 
 .myTextStyle{
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-border-color: orange;
     -fx-background-color: linear-gradient(#EE5C10, #ECA986, #F29463);
@@ -163,7 +163,7 @@ and open the template in the editor.
 
 /*side menu color*/
 .bPane {
-    -fx-background-color: linear-gradient(#9bc9f6, #278bec, #6ab3fc, #9bc1e5, #4e657b);
+    -fx-background-color: linear-gradient(#4e657b, #278bec, #6ab3fc, #9bc1e5, #9bc9f6);
 }
 
 /*cell selected label*/
@@ -201,12 +201,21 @@ and open the template in the editor.
 }
 
 #Logo {
-    -fx-font-family: "Courier New";
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 0;
     -fx-text-alignment: center;
+    -fx-background-color: #FFE01B;
+    -fx-background-color: linear-gradient(#FCE043 ,#FB7BA2); 
+    -fx-font-family: "Verdana";
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-background-size: 50px 50px;
     -fx-background-image: url('logo.png');
-/*    -fx-background-size: 25px 25px;*/
     -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
+    -fx-background-position: right;
+    -fx-border-radius: 10 10 10 10; 
+    -fx-background-radius: 10 10 10 10; 
+}
+
+#Logo .text {
+    -fx-fill: #241C15;
 }

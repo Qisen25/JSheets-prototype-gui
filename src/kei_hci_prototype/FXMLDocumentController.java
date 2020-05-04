@@ -443,22 +443,22 @@ public class FXMLDocumentController implements Initializable
                     //vertical scroll down
                     if(verti.getValue() <= verti.getHeight() && yChange > 0.0)
                     {
-                        verti.setValue(verti.getValue() + 0.01);
+                        verti.setValue(verti.getValue() + 0.005);
                     }
                     //scroll up
                     else if(verti.getValue() >= verti.getMinHeight() && yChange < 0.0)
                     {
-                        verti.setValue(verti.getValue() - 0.01);
+                        verti.setValue(verti.getValue() - 0.005);
                     }
                     //horizontal scroll to right.
                     if(horiz.getValue() <= horiz.getMax() && xChange > 0.0)
                     {
-                        horiz.setValue(horiz.getValue() + 0.95);
+                        horiz.setValue(horiz.getValue() + 0.75);
                     }
                     //horizontal scroll to left
                     else if(horiz.getValue() >= horiz.getMinWidth() && xChange < 0.0)
                     {
-                        horiz.setValue(horiz.getValue() - 0.95);
+                        horiz.setValue(horiz.getValue() - 0.75);
                     }
                     
                     System.out.println(t.getSceneX() + " - " + horiz.getWidth() + " = " + xChange + "x.getVal " + horiz.getValue());                   

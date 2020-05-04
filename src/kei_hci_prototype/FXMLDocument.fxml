@@ -12,34 +12,33 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 
 <AnchorPane id="AnchorPane" fx:id="anchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="672.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kei_hci_prototype.FXMLDocumentController">
     <children>
       
       <AnchorPane fx:id="bPane" layoutX="866.0" prefHeight="673.0" prefWidth="218.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane fx:id="filePane" layoutX="28.0" layoutY="25.0" prefHeight="126.0" prefWidth="134.0">
+            <Pane fx:id="filePane" layoutX="20.0" layoutY="98.0" prefHeight="96.0" prefWidth="171.0">
                <children>
                   <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="openButton" layoutX="66.0" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="newButton" layoutX="1.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
-                  <Button fx:id="exportButton" layoutY="87.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="exportButton" layoutX="125.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="printButton" layoutX="66.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                </children>
             </Pane>
-            <Pane fx:id="editPane" layoutX="28.0" layoutY="178.0" prefHeight="146.0" prefWidth="149.0">
+            <Pane fx:id="editPane" layoutX="20.0" layoutY="240.0" prefHeight="146.0" prefWidth="171.0">
                <children>
-                  <Button fx:id="undoButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
-                  <Button fx:id="redoButton" layoutX="65.0" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
-                  <Button fx:id="cutButton" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
-                  <Button fx:id="pasteButton" layoutY="88.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
-                  <Button fx:id="copyButton" layoutX="65.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="undoButton" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="redoButton" layoutX="63.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="cutButton" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="pasteButton" layoutX="124.0" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="copyButton" layoutX="63.0" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                </children>
             </Pane>
-            <Label fx:id="fileTitle" layoutX="29.0" prefHeight="16.0" prefWidth="118.0" text="  File" />
-            <Label fx:id="editTitle" layoutX="29.0" layoutY="154.0" prefHeight="16.0" prefWidth="118.0" text="  Edit" />
-            <Accordion fx:id="toolMenu" layoutX="6.0" layoutY="353.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="200.0" prefWidth="208.0">
+            <Label fx:id="fileTitle" layoutX="20.0" layoutY="75.0" prefHeight="16.0" prefWidth="127.0" text="  File" />
+            <Label fx:id="editTitle" layoutX="20.0" layoutY="217.0" prefHeight="16.0" prefWidth="127.0" text="  Edit" />
+            <Accordion fx:id="toolMenu" layoutX="5.0" layoutY="428.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="200.0" prefWidth="208.0">
               <panes>
                   <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="208.0" text="Charts">
                     <content>
@@ -120,19 +119,16 @@
                   </TitledPane>
               </panes>
             </Accordion>
-            <Label fx:id="toolsTitle" layoutX="27.0" layoutY="331.0" prefHeight="16.0" prefWidth="111.0" text="Tools" />
-            <StackPane layoutX="80.0" layoutY="623.0" prefHeight="49.0" prefWidth="134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="4.0">
-               <children>
-                  <Label fx:id="Logo" prefHeight="44.0" prefWidth="88.0" text="JSheets" />
-               </children>
-            </StackPane>
+            <Label fx:id="toolsTitle" layoutX="33.0" layoutY="406.0" prefHeight="16.0" prefWidth="127.0" text="Tools" />
+            <Label fx:id="Logo" layoutX="31.0" layoutY="2.0" prefHeight="44.0" prefWidth="186.0" text="JSheets" AnchorPane.rightAnchor="16.0" />
+            <Button layoutX="160.0" layoutY="645.0" mnemonicParsing="false" text="Settings" />
          </children>
       </AnchorPane>
       <Label fx:id="cellSelected" layoutX="14.0" layoutY="636.0" prefHeight="16.0" prefWidth="178.0" text="Cells Selected:" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="14.0" />
       <TextField fx:id="cellText" layoutX="192.0" layoutY="631.0" prefHeight="26.0" prefWidth="99.0" promptText="Enter Cells..." AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="192.0" />
       <AnchorPane fx:id="spreadPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="0.0" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="223.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="table" layoutX="51.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="603.0" prefWidth="811.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TableView fx:id="table" layoutX="51.0" maxHeight="1.7976931348623157E308" prefHeight="603.0" prefWidth="811.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <ListView fx:id="indexList" layoutX="-2.0" layoutY="27.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="561.0" prefWidth="53.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="27.0" />
          </children>
       </AnchorPane>
