@@ -5,6 +5,7 @@
  */
 package kei_hci_prototype;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,9 +14,13 @@ import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -24,7 +29,6 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -36,7 +40,7 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /*
@@ -62,7 +66,27 @@ public class FXMLDocumentController implements Initializable
     private Label fileTitle, editTitle, cellSelected, toolsTitle, Logo;
     @FXML
     private Button saveButton, openButton, newButton, exportButton, printButton,
-            undoButton, redoButton, copyButton, cutButton, pasteButton;
+            undoButton, redoButton, copyButton, cutButton, pasteButton, feedbackButton, settingsButton,
+            helpButton;
+    
+    //fmxml feedback button handler
+    @FXML
+    void startFeedback(ActionEvent event) {
+        this.openWindow("/feedback_window/FeedbackWindow.fxml", 
+                        "/CSS/feedback/feedbackStyle.css", "Feedback", false);
+    }
+    
+    @FXML
+    void startHelp(ActionEvent event) {
+        this.openWindow("/help_window/HelpWindow.fxml", 
+                        "/CSS/help/helpStyle.css", "Help", true);
+    }
+
+    @FXML
+    void startSettings(ActionEvent event) {
+        this.openWindow("/settings_window/SettingsWindow.fxml", 
+                        "/CSS/settings/settingsStyle.css", "Settings", true);
+    }
 
     private Map<String, TableColumn<Row, String>> cols;
     private TableColumn prevCol = null;
@@ -297,6 +321,9 @@ public class FXMLDocumentController implements Initializable
         this.copyButton.setTooltip(new Tooltip("Copy\nCTRL + C"));
         this.cutButton.setTooltip(new Tooltip("Cut\nCTRL + X"));
         this.pasteButton.setTooltip(new Tooltip("Paste\nCTRL + V"));
+        this.feedbackButton.setTooltip(new Tooltip("Feedback\n-We'd like to hear from you!"));
+        this.helpButton.setTooltip(new Tooltip("Help\n-How to use"));
+        this.settingsButton.setTooltip(new Tooltip("Settings\n-Set how JSheets does some things"));
         
         //text field
         cellText.setTooltip(new Tooltip("Enter to select cell positions\n" + 
@@ -388,6 +415,29 @@ public class FXMLDocumentController implements Initializable
                     break; 
             }
         });
+    }
+    
+    /*
+        handling opening of other windows
+    */
+    private void openWindow(String url, String style, String title, boolean isResizable)
+    {
+        try
+        {
+            Parent root = FXMLLoader.load(getClass().getResource(url));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            
+            scene.getStylesheets().add(style);
+            stage.setScene(scene);
+            stage.setTitle(title);
+            stage.setResizable(isResizable);
+            stage.show();
+        }
+        catch(IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     /*

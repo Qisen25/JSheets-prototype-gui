@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="441.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="feedback_window.FeedbackWindowController">
+   <children>
+      <AnchorPane fx:id="background" layoutX="40.0" layoutY="14.0" prefHeight="421.0" prefWidth="503.0" />
+      <TextArea layoutX="119.0" layoutY="299.0" prefHeight="79.0" prefWidth="363.0" />
+      <Button fx:id="submitButton" layoutX="169.0" layoutY="393.0" mnemonicParsing="false" onAction="#submitHandler" prefHeight="40.0" prefWidth="100.0" text="Submit" />
+      <Button fx:id="closeButton" layoutX="314.0" layoutY="393.0" mnemonicParsing="false" onAction="#closeHandler" prefHeight="40.0" prefWidth="100.0" text="Close" />
+      <ListView fx:id="easeList" layoutX="281.0" layoutY="70.0" maxWidth="-Infinity" prefHeight="40.0" prefWidth="185.0" />
+      <ListView fx:id="layoutList" layoutX="281.0" layoutY="116.0" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="185.0" />
+      <ListView fx:id="expList" layoutX="281.0" layoutY="182.0" maxWidth="-Infinity" prefHeight="40.0" prefWidth="185.0" />
+      <Label layoutX="107.0" layoutY="70.0" prefHeight="40.0" prefWidth="168.0" text="Ease of Use" />
+      <Label layoutX="110.0" layoutY="116.0" prefHeight="40.0" prefWidth="168.0" text="Layout Design" />
+      <Label fx:id="guiXp" layoutX="107.0" layoutY="166.0" prefHeight="71.0" prefWidth="175.0" text="text" />
+      <Label fx:id="feelLabel" layoutX="110.0" layoutY="237.0" prefHeight="40.0" prefWidth="138.0" text="Label" />
+      <ListView fx:id="faceList" layoutX="265.0" layoutY="227.0" maxWidth="-Infinity" prefHeight="64.0" prefWidth="160.0" />
+   </children>
+</AnchorPane>

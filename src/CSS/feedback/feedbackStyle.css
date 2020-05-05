@@ -1,0 +1,118 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 05/05/2020, 11:09:21 AM
+    Author     : Kei Wang
+*/
+
+#AnchorPane {
+    -fx-background-color: linear-gradient(#04619F, #000000);
+}
+
+#background {
+    -fx-background-image: url('back.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 500px 500px;
+    -fx-border-radius: 10 10 10 10; 
+    -fx-background-radius: 10 10 10 10; 
+}
+
+
+#submitButton{
+    -fx-background-color: linear-gradient(#09C6F9, #045DE9);
+    -fx-text-fill: white;
+}
+
+#closeButton {
+    -fx-background-color: linear-gradient(#FF0000, #990000);
+    -fx-text-fill: white;
+}
+
+#submitButton:hover, #closeButton:hover {
+    -fx-scale-y: 1.1;
+}
+
+#submitButton:pressed, #closeButton:pressed {
+    -fx-background-color: #09C6F9;
+    -fx-scale-y: 0.8;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+}
+
+.list-cell:hover {
+    -fx-background-color: peachpuff;
+}
+
+.fullStar {
+    -fx-background-image: url('fullStar.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-cell-size: 35px ;
+    -fx-background-size: 30px 30px;
+}
+
+.blankStar {
+    -fx-background-image: url('blankStar.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-cell-size: 35px ;
+    -fx-background-size: 30px 30px;
+}
+
+.blankSad {
+    -fx-background-image: url('blankSad.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-cell-size: 50px ;
+    -fx-background-size: 30px 30px;
+}
+
+.blankOk {
+    -fx-background-image: url('blankOk.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-cell-size: 50px ;
+    -fx-background-size: 30px 30px;
+}
+
+.blankHappy {
+    -fx-background-image: url('blankHappy.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-cell-size: 50px ;
+    -fx-background-size: 30px 30px;
+}
+
+.fillSad {
+    -fx-background-image: url('fillSad.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-cell-size: 50px ;
+    -fx-background-size: 34px 34px; 
+}
+
+.fillOk {
+    -fx-background-image: url('fillOk.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-cell-size: 50px ;
+    -fx-background-size: 34px 34px; 
+}
+
+.fillHappy {
+    -fx-background-image: url('fillHappy.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-cell-size: 50px ;
+    -fx-background-size: 34px 34px; 
+}

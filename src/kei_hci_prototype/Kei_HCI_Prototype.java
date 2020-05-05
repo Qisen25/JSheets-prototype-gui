@@ -22,7 +22,7 @@ public class Kei_HCI_Prototype extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/CSS/tablecss.css");
+        scene.getStylesheets().add("/CSS/main/tablecss.css");
         stage.setScene(scene);
         stage.setTitle("JSheets");
         stage.show();
