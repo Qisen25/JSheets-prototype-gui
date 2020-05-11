@@ -12,6 +12,10 @@ and open the template in the editor.
     -fx-background-color: linear-gradient(#04619F, #000000);
 }
 
+.label {
+    -fx-font-weight: bold;
+}
+
 #background {
     -fx-background-image: url('back.png');
     -fx-background-repeat: no-repeat;

@@ -185,7 +185,7 @@ and open the template in the editor.
 
 /*side menu color*/
 .bPane {
-    -fx-background-color: linear-gradient(#4e657b, #278bec, #6ab3fc, #9bc1e5, #9bc9f6);
+    -fx-background-color: linear-gradient(#4e657b, #278bec, #6ab3fc, #9bc1e5, #4e657b);
 }
 
 /*cell selected label*/

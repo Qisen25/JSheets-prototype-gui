@@ -6,6 +6,7 @@ and open the template in the editor.
 /* 
     Created on : 05/05/2020, 1:07:20 PM
     Author     : kei wang
+    Reference: images - https://www.pngguru.com/free-transparent-background-png-clipart-blwyh
 */
 
 
@@ -13,6 +14,9 @@ and open the template in the editor.
     -fx-background-color: linear-gradient(#5DE6DE, #B58ECC);
 }
 
-#getStartedPane, #aboutIconsPane, #whatPane {
+#getStartedPane, #aboutIconsPane, #whatPane, #toolPane, #futurePane {
     -fx-background-color: white;
+    -fx-background-image: url("back.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }
