@@ -79,7 +79,7 @@ public class FXMLDocumentController implements Initializable
     @FXML
     void startHelp(ActionEvent event) {
         this.openWindow("/help_window/HelpWindow.fxml", 
-                        "/CSS/help/helpStyle.css", "Help", true);
+                        "/CSS/help/helpStyle.css", "Help", false);
     }
 
     @FXML

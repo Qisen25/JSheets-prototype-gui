@@ -48,9 +48,9 @@
                                 <content>
                                   <AnchorPane fx:id="chartPane" minHeight="0.0" minWidth="0.0" prefHeight="203.0" prefWidth="200.0">
                                        <children>
-                                          <Button layoutX="3.0" layoutY="3.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Pie" />
-                                          <Button layoutX="3.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Histogram" />
-                                          <Button layoutX="3.0" layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Line" />
+                                          <Button fx:id="pieButton" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Pie" />
+                                          <Button fx:id="histoButton" layoutX="3.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Histogram" />
+                                          <Button fx:id="lineButton" layoutX="3.0" layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Line" />
                                        </children>
                                     </AnchorPane>
                                 </content>
@@ -66,13 +66,13 @@
                                 <content>
                                   <AnchorPane fx:id="mathPane" minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="200.0">
                                        <children>
-                                          <Button layoutX="3.0" layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Sum" />
-                                          <Button layoutX="3.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Product" />
-                                          <Button layoutX="3.0" layoutY="100.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Average" />
-                                          <Button layoutX="3.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Min" />
-                                          <Button layoutX="3.0" layoutY="200.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Range" />
-                                          <Button layoutX="3.0" layoutY="168.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Max" />
-                                          <MenuButton layoutX="3.0" layoutY="3.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Rounding">
+                                          <Button fx:id="sumButton" layoutX="3.0" layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Sum" />
+                                          <Button fx:id="prodButton" layoutX="3.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Product" />
+                                          <Button fx:id="avgButton" layoutX="3.0" layoutY="100.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Average" />
+                                          <Button fx:id="minButton" layoutX="3.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Min" />
+                                          <Button fx:id="rangeButton" layoutX="3.0" layoutY="200.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Range" />
+                                          <Button fx:id="maxButton" layoutX="3.0" layoutY="168.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Max" />
+                                          <MenuButton fx:id="roundDropdown" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Rounding">
                                             <items>
                                               <MenuItem mnemonicParsing="false" text="Bankers Rounding" />
                                               <MenuItem mnemonicParsing="false" text="Round Whole" />

@@ -242,3 +242,84 @@ and open the template in the editor.
 #Logo .text {
     -fx-fill: #241C15;
 }
+
+/*math buttons REFERENCE ICONS: https://icons8.com/icons*/
+#sumButton {
+    -fx-background-size: 23px 23px;
+    -fx-background-image: url('sigma.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-text-alignment: left;
+}
+
+#prodButton {
+    -fx-background-size: 23px 23px;
+    -fx-background-image: url('product.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-text-alignment: left;
+}
+
+#avgButton {
+    -fx-background-size: 23px 23px;
+    -fx-background-image: url('average.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-text-alignment: left;
+}
+
+#minButton {
+    -fx-background-size: 30px 30px;
+    -fx-background-image: url('min.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-text-alignment: left;
+}
+
+#maxButton {
+    -fx-background-size: 30px 30px;
+    -fx-background-image: url('max.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-text-alignment: left;
+}
+
+#rangeButton {
+    -fx-background-size: 40px 40px;
+    -fx-background-image: url('range.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-text-alignment: left;
+}
+
+#roundDropdown {
+    -fx-background-size: 30px 30px;
+    -fx-background-image: url('rounding.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-text-alignment: left;
+}
+
+#pieButton {
+    -fx-background-size: 30px 30px;
+    -fx-background-image: url('pie.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-text-alignment: left;
+}
+
+#lineButton {
+    -fx-background-size: 40px 40px;
+    -fx-background-image: url('line.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-text-alignment: left;
+}
+
+#histoButton {
+    -fx-background-size: 40px 40px;
+    -fx-background-image: url('histo.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-text-alignment: left;
+}

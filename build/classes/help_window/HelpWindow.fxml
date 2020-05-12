@@ -33,10 +33,10 @@
                         </Text>
                         <Label fx:id="tipsPara" layoutX="14.0" layoutY="133.0" prefHeight="230.0" prefWidth="505.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="FreeSans" size="14.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="47.0" fitWidth="200.0" layoutX="140.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="43.0" fitWidth="174.0" layoutX="140.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../CSS/help/logo.png" />
                            </image>
@@ -68,42 +68,116 @@
                               <Font name="Trebuchet MS Bold" size="22.0" />
                            </font>
                         </Text>
-                        <Label fx:id="iconInfo" layoutX="24.0" layoutY="20.0" prefHeight="127.0" prefWidth="524.0" text="Icons are buttons that provide visual representation of a task." wrapText="true" />
-                        <ImageView fitHeight="191.0" fitWidth="111.0" layoutX="558.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Label fx:id="iconInfo" layoutX="24.0" layoutY="7.0" prefHeight="127.0" prefWidth="524.0" text="Icons are buttons that provide visual representation of a task." wrapText="true">
+                           <font>
+                              <Font name="FreeSans" size="14.0" />
+                           </font></Label>
+                        <ImageView fitHeight="172.0" fitWidth="103.0" layoutX="558.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../CSS/help/rightPane.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="199.0" layoutY="185.0" prefHeight="82.0" prefWidth="271.0" text="TODO: decorate tools button &amp; explain highlighting button &amp; tool tips" wrapText="true" />
+                        <Label fx:id="toolInfo" layoutX="24.0" layoutY="128.0" prefHeight="253.0" prefWidth="520.0" text="TODO: decorate tools button &amp; explain highlighting button" wrapText="true">
+                           <font>
+                              <Font name="FreeSans" size="14.0" />
+                           </font></Label>
+                        <Text layoutX="24.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What about the tool menu?" wrappingWidth="209.7294921875">
+                           <font>
+                              <Font name="Trebuchet MS Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="150.0" fitWidth="149.0" layoutX="558.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSS/help/toolInfo.png" />
+                           </image>
+                        </ImageView>
                      </children></AnchorPane>
             </content>
           </Tab>
             <Tab text="Tool tips">
               <content>
-                <AnchorPane fx:id="toolPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane fx:id="toolPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What about Tool tips?" wrappingWidth="299.7294921875">
+                           <font>
+                              <Font name="Trebuchet MS Bold" size="22.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="tooltabInfo" layoutX="14.0" layoutY="7.0" prefHeight="127.0" prefWidth="498.0" text="Tool tips are very simple. If you don't know what a button does or how to type into cell, just keep your mouse hovered over it for a few seconds and a tool tip will pop up and explain what it does." wrapText="true">
+                           <font>
+                              <Font name="FreeSans" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="97.0" fitWidth="102.0" layoutX="566.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSS/help/daTip.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="14.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Why are the cells and buttons highlighted when I hover over them?" wrappingWidth="433.7294921875">
+                           <font>
+                              <Font name="Trebuchet MS Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="tooltabInfo1" layoutX="14.0" layoutY="142.0" prefHeight="114.0" prefWidth="498.0" text="This is to allow you to better visualise what you are going to select and judge what is clickable or editable on this spreadsheet." wrapText="true">
+                           <font>
+                              <Font name="FreeSans" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="111.0" fitWidth="203.0" layoutX="430.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSS/help/highlightTip.png" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab text="More About Entering Data into Cells">
               <content>
                 <AnchorPane fx:id="whatPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="cellInfo" layoutX="14.0" layoutY="52.0" prefHeight="144.0" prefWidth="436.0" text="Steps..." />
+                        <Label fx:id="cellInfo" layoutX="13.0" layoutY="26.0" prefHeight="144.0" prefWidth="436.0" text="Steps...">
+                           <font>
+                              <Font name="FreeSans" size="14.0" />
+                           </font></Label>
                         <Text layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How type in cells?" wrappingWidth="255.7294921875">
                            <font>
                               <Font name="Trebuchet MS Bold" size="22.0" />
                            </font>
                         </Text>
-                        <ImageView fitHeight="164.0" fitWidth="197.0" layoutX="456.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="164.0" fitWidth="197.0" layoutX="455.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../CSS/help/dubClick.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="13.0" layoutY="227.0" prefHeight="147.0" prefWidth="677.0" text="The reason why JSheets requires you to press Enter key to show changes on cells is because JSheets is built with the default javafx library, which has limitations. The default Javafx library doesn't provide an easy way to handle cell input or spreadsheet like functionality. Due to constraints such as time and only being allowed to use the default javafx library for the HCI unit, it was not possible to enable entering data without pressing the Enter key, and it was not feasible to build this functionality from scratch due to time. This may be done in future releases..." wrapText="true" />
-                        <Text layoutX="14.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Why press Enter key to commit cell input?" wrappingWidth="463.7294921875">
+                        <Label layoutX="19.0" layoutY="253.0" prefHeight="147.0" prefWidth="677.0" text="The reason why JSheets requires you to press Enter key to show changes on cells is because JSheets is built with the default javafx library, which has limitations. The default Javafx library doesn't provide an easy way to handle cell input or spreadsheet like functionality. Due to constraints such as time and only being allowed to use the default javafx library for the HCI unit, it was not possible to enable saving data to a cell without pressing the Enter key, and it was not feasible to build this functionality from scratch due to time. This may be done in future releases..." wrapText="true">
                            <font>
-                              <Font name="Trebuchet MS Bold" size="21.0" />
+                              <Font size="11.0" />
+                           </font></Label>
+                        <Text layoutX="23.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Why press Enter key to commit cell input?" wrappingWidth="463.7294921875">
+                           <font>
+                              <Font name="Trebuchet MS Bold" size="15.0" />
                            </font>
                         </Text>
+                        <Text layoutX="13.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cell selection via Enter Cells... textbox?" wrappingWidth="423.7294921875">
+                           <font>
+                              <Font name="Trebuchet MS Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="cellInfo1" layoutX="13.0" layoutY="168.0" prefHeight="91.0" prefWidth="471.0" text="Cells can be selected by typing into the &quot;Enter Cells...&quot; textbox at the bottom left corner of JSheet screen. Input formats should follow, A1 for single cell or A1:A2 for multi. Substitute any letter in place of A followed by any number. Multi selection must use colon between the start cell and end cell." wrapText="true">
+                           <font>
+                              <Font name="FreeSans" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="42.0" fitWidth="110.0" layoutX="512.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSS/help/singleSelect.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="40.0" fitWidth="117.0" layoutX="511.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CSS/help/multiSelect.png" />
+                           </image>
+                        </ImageView>
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -113,10 +187,13 @@
                      <children>
                         <Text layoutX="21.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Future plans" wrappingWidth="289.9755859375">
                            <font>
-                              <Font name="Trebuchet MS" size="22.0" />
+                              <Font name="Trebuchet MS Bold" size="22.0" />
                            </font>
                         </Text>
-                        <Label layoutX="14.0" layoutY="59.0" prefHeight="245.0" prefWidth="385.0" text="TODO: Add left handside pane alternative for left handers, enter cell data without pressing Enter key..." wrapText="true" />
+                        <Label fx:id="futureRelease" layoutX="14.0" layoutY="27.0" prefHeight="311.0" prefWidth="673.0" text="TODO: Add left handside pane alternative for left handers, enter cell data without pressing Enter key..." wrapText="true">
+                           <font>
+                              <Font name="FreeSans Bold Oblique" size="16.0" />
+                           </font></Label>
                      </children>
                   </AnchorPane>
               </content>

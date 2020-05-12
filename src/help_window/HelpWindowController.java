@@ -14,13 +14,13 @@ import javafx.scene.control.Label;
 /**
  * FXML Controller class
  *
- * @author Kei Wang
+ * @author Kei Wang 19126089
  */
 public class HelpWindowController implements Initializable
 {
 
     @FXML
-    private Label getStartPara, tipsPara, iconInfo, cellInfo;
+    private Label getStartPara, tipsPara, iconInfo, cellInfo, toolInfo, futureRelease;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -49,6 +49,20 @@ public class HelpWindowController implements Initializable
                          "3. After you are done typing, press enter key to confirm cell input\n" + 
                          "Repeat these steps as much as you like!");
         cellInfo.setWrapText(true);
+        
+        toolInfo.setText("Specific functionality that is not used by the average users can be found in the tools menu on the right pane." + 
+                         "\nAll menus in the tray can be toggled on or off so that you don't always need to click to navigate through menus!\n" + 
+                         "\nCharts menu: will provide functionality for creating and viewing charts of your data in a separate window.\n" + 
+                          "\nMath menu: upon selecting a button, a mini window will be opened allowing you to perform math on selected cells" + 
+                          " and outputting result on a cell you specify from this mini window.\n" + 
+                          "\nSorts menu will enable you to sort selected cell data directly with a button click, Time will enable you to add time data such as current date with just one click!");
+        toolInfo.setWrapText(true);
+        
+        futureRelease.setText("1. Option to move right pane to left side of interface for users who prefer it on the left\n   side.\n" + 
+                              "2. Enter data into cells without pressing Enter to confirm edit.\n" + 
+                              "3. More functionality and integration with XSpread.\n" + 
+                              "4. TODO: add more functional windows.");
+        futureRelease.setWrapText(true);
         
     }    
     
