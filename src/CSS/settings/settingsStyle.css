@@ -8,3 +8,30 @@ and open the template in the editor.
     Author     : kei wang
 */
 
+#AnchorPane {
+    -fx-background-color: linear-gradient(#20A4F3, #182B3A);
+}
+
+#applyButton{
+    -fx-background-color: linear-gradient(#09C6F9, #045DE9);
+    -fx-text-fill: white;
+}
+
+#resetButton{
+    -fx-background-color: linear-gradient(#EC9F05, #FF4E00);
+    -fx-text-fill: white;
+}
+
+#closeButton {
+    -fx-background-color: linear-gradient(#FF0000, #990000);
+    -fx-text-fill: white;
+}
+
+#applyButton:hover, #closeButton:hover, #resetButton:hover {
+    -fx-scale-y: 1.1;
+}
+
+#applyButton:pressed, #closeButton:pressed, #resetButton:pressed {
+    -fx-background-color: #09C6F9;
+    -fx-scale-y: 0.8;
+}

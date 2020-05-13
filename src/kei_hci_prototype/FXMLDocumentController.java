@@ -5,12 +5,19 @@
  */
 package kei_hci_prototype;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
@@ -40,6 +47,8 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -57,7 +66,7 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private TextField cellText;
     @FXML
-    private TableView table;
+    private TableView<Row> table;
     @FXML
     private Pane filePane, editPane;
     @FXML
@@ -68,6 +77,52 @@ public class FXMLDocumentController implements Initializable
     private Button saveButton, openButton, newButton, exportButton, printButton,
             undoButton, redoButton, copyButton, cutButton, pasteButton, feedbackButton, settingsButton,
             helpButton;
+    
+    //open file chooser
+    @FXML
+    void openFile(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File(System.getProperty("user.home")));
+        fc.setTitle("Open Sheet");
+        fc.getExtensionFilters().addAll(new ExtensionFilter("CSV files", "*.csv"), 
+                                        new ExtensionFilter("SC files", "*.sc"),
+                                        new ExtensionFilter("All files", "*"));
+        File choseFile = fc.showOpenDialog(null);
+        
+        if(choseFile != null)
+        {
+            readFile(choseFile);
+        }
+        else
+        {
+            System.out.println("no file selected when open");
+        }
+
+    }
+    
+    @FXML
+    void saveFile(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File(System.getProperty("user.home")));
+        fc.setTitle("Save Sheet");
+        fc.setInitialFileName("name.csv");
+        fc.getExtensionFilters().addAll(new ExtensionFilter("CSV files", "*.csv"), 
+                                        new ExtensionFilter("SC files", "*.sc"));
+        File choseFile = fc.showSaveDialog(null);
+        
+        if(choseFile != null)
+        {
+            if(fc.getSelectedExtensionFilter().getDescription().equals("CSV files"))
+            {
+                this.writeToFile(choseFile, ".csv");
+            }
+        }
+        else
+        {
+            System.out.println("file not selected for save");
+        }
+
+    }
     
     //fmxml feedback button handler
     @FXML
@@ -439,6 +494,90 @@ public class FXMLDocumentController implements Initializable
             System.out.println(e.getMessage());
         }
     }
+    
+    /*
+        Read file into spreadsheet
+    */
+    private void readFile(File file)
+    {
+        BufferedReader reader;
+        String lineRead;
+        String[] lineArr;
+        int count = 0;
+        try
+        {
+            reader = new BufferedReader(new FileReader(file));
+            table.getItems().clear();
+            ObservableList<Row> list = FXCollections.observableArrayList(this.refreshRows());
+            table.setItems(list);
+            lineRead = reader.readLine();
+            while(lineRead != null && count < 31)
+            {
+                lineArr = lineRead.split(",", -1);
+                
+                if(lineArr.length > 0)
+                {
+                    Row r = new Row(String.valueOf(count));//get current line and store in row format
+                    for(int i = 0; i < lineArr.length; i++)
+                    {
+                        if(i < 11)
+                            r.setByIndex(i, lineArr[i]);                      
+                    }
+                    table.getItems().set(count, r);//set row to new row
+                }
+                lineRead = reader.readLine();
+                count++;
+            }
+            reader.close();
+        }
+        catch(IOException e)
+        {
+            System.out.println("error reading file" + e.getMessage());
+        }
+    }
+    //write to file
+    private void writeToFile(File file, String ext)
+    {
+        PrintWriter writer;
+        try
+        {
+            String output = "";
+            if(file.getAbsolutePath().contains(".csv"))
+            {
+                writer = new PrintWriter(file);
+            }
+            else
+            {
+                writer = new PrintWriter(file.getAbsolutePath() + "." + ext);
+            }
+            
+            for(Row row : table.getItems())
+            {
+                output += row.csvString() + "\n";
+            }
+            writer.println(output);
+            writer.close();
+        }
+        catch(IOException e)
+        {
+            System.out.println("error with saving file");
+        }
+    }
+    
+    /*
+        Create empty rows when creating a new sheet or loading another
+    */
+    private List<Row> refreshRows()
+    {
+        List<Row> result = new ArrayList<>();
+        for (int i = 0; i <= 30; i++)
+        {
+            Row r = new Row(String.valueOf(i));
+            result.add(r);
+        }
+        
+        return result;
+    }
 
     /*
         Reference: https://community.oracle.com/message/11334815#11334815
@@ -514,9 +653,8 @@ public class FXMLDocumentController implements Initializable
                     System.out.println(t.getSceneX() + " - " + horiz.getWidth() + " = " + xChange + "x.getVal " + horiz.getValue());                   
                 }
             });
-            
-            cell.setTooltip(new Tooltip("Tip.\n double click to begin editing cell\n Press enter to set changes"));
-            
+
+            cell.setTooltip(new Tooltip("\nTip.\n double click to begin editing cell\n Press enter to set changes"));
             return cell;
         }
     }

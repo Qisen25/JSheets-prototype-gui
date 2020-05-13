@@ -47,7 +47,7 @@ public class Row {
         
         for(int i = 0; i < cols.length; i++)
         {
-            cols[i] = new SimpleStringProperty("Empty");
+            cols[i] = new SimpleStringProperty("");
         }
     }
 
@@ -160,10 +160,33 @@ public class Row {
         this.cols[10].set(K);
     }
     
+    public void setByIndex(int i, String str)
+    {
+        this.cols[i].set(str);
+    }
+    
     //row return index
     public String toString()
     {
         return index;
+    }
+    
+    public String csvString()
+    {
+        String result = "";
+        for(int i = 0; i < this.cols.length; i++)
+        {
+            if(i < this.cols.length - 1)
+            {
+                result += this.cols[i].get() + ",";
+            }
+            else
+            {
+                result += this.cols[i].get();
+            }
+        }
+        
+        return result;
     }
 
     //row selection

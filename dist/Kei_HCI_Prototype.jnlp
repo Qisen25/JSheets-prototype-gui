@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Kei_HCI_Prototype.jar" size="757469" download="eager" />
+    <jar href="Kei_HCI_Prototype.jar" size="761944" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="kei_hci_prototype.Kei_HCI_Prototype"  name="Kei_HCI_Prototype" />
   <update check="always"/>

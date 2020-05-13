@@ -61,7 +61,8 @@ public class HelpWindowController implements Initializable
         futureRelease.setText("1. Option to move right pane to left side of interface for users who prefer it on the left\n   side.\n" + 
                               "2. Enter data into cells without pressing Enter to confirm edit.\n" + 
                               "3. More functionality and integration with XSpread.\n" + 
-                              "4. TODO: add more functional windows.");
+                              "4. TODO: add more functional windows.\n" + 
+                              "5. Open multiple sheets at once in the interface");
         futureRelease.setWrapText(true);
         
     }    
