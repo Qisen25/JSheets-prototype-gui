@@ -24,7 +24,7 @@ public class Kei_HCI_Prototype extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/CSS/main/tablecss.css");
         stage.setScene(scene);
-        stage.setTitle("JSheets");
+        stage.setTitle("[ New Sheet ] - JSheets");
         stage.show();
         
         Parent helpRoot = FXMLLoader.load(getClass().getResource("/help_window/HelpWindow.fxml"));
@@ -32,6 +32,7 @@ public class Kei_HCI_Prototype extends Application {
         Scene otherScene = new Scene(helpRoot);
         otherScene.getStylesheets().add("/CSS/help/helpStyle.css");
         tutorial.setScene(otherScene);
+        tutorial.setResizable(false);
         tutorial.show();
     }
 

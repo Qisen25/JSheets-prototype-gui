@@ -29,11 +29,11 @@
             </Pane>
             <Pane fx:id="editPane" layoutX="20.0" layoutY="240.0" prefHeight="146.0" prefWidth="171.0">
                <children>
-                  <Button fx:id="undoButton" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
-                  <Button fx:id="redoButton" layoutX="63.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="undoButton" layoutX="63.0" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="redoButton" layoutX="125.0" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="cutButton" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
-                  <Button fx:id="pasteButton" layoutX="124.0" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
-                  <Button fx:id="copyButton" layoutX="63.0" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="pasteButton" layoutY="88.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="copyButton" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                </children>
             </Pane>
             <Label fx:id="fileTitle" layoutX="20.0" layoutY="75.0" prefHeight="16.0" prefWidth="127.0" text="  File" />

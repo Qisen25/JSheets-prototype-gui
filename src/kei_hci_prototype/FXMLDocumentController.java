@@ -153,18 +153,12 @@ public class FXMLDocumentController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        setupSideMenuStyle();
-        setupTooltips();
+        this.setupSideMenuStyle();
+        this.setupTooltips();
 
-        cols = new HashMap<>();
-//        TableColumn<Row, String> index = new TableColumn<>("index");
-//        index.setId("index");
-//        index.setSortable(false);
-//        PropertyValueFactory<Row, String> prop = new PropertyValueFactory<>("index");
-//        index.setCellValueFactory(prop);
-//        table.getColumns().add(index);
+        cols = new HashMap<>();//Stores tablecolumn for easy access
+
         table.setEditable(true);
-
         //set columns headers for table
         for (char i = 'A'; i <= 'K'; i++)
         {
@@ -174,6 +168,7 @@ public class FXMLDocumentController implements Initializable
             Callback<TableColumn<Row, String>, TableCell<Row, String>> cellFactory = new DragSelectionCellFactory(TextFieldTableCell.forTableColumn());
             inCol.setCellFactory(cellFactory);
             inCol.setCellValueFactory(inProp);
+            inCol.setSortable(false);
             setupColForEdit(inCol);
             table.getColumns().add(inCol);//add columns to table            
             inCol.setMinWidth(100.0);//set cell size to atleast 100
@@ -236,7 +231,7 @@ public class FXMLDocumentController implements Initializable
                     }
                 }
 
-                //for any rows selected higlight corresponding index header
+                //for any rows selected, higlight corresponding index header
                 for (Row r : rowz)
                 {
                     r.setSelected(true);
@@ -272,14 +267,7 @@ public class FXMLDocumentController implements Initializable
                 //find horizontal scroll bar
                 Iterator barIter = table.lookupAll(".scroll-bar:horizontal").iterator();
                 barIter.next();
-                horiz = (ScrollBar) barIter.next();
-                //System.out.println(horiz.orientationProperty());
-                
-//                for(Node n : table.lookupAll(".scroll-bar:horizontal"))
-//                {
-//                    ScrollBar h = (ScrollBar) n;
-//                    System.out.println(h.orientationProperty());
-//                }
+                horiz = (ScrollBar) barIter.next();//get horizontal scroll bar
 
                 s1.valueProperty().bindBidirectional(verti.valueProperty());
             }
@@ -349,7 +337,6 @@ public class FXMLDocumentController implements Initializable
                 }
             }
         });
-
     }
 
     private void setupSideMenuStyle()
@@ -388,7 +375,7 @@ public class FXMLDocumentController implements Initializable
     }
 
     /*
-     *highlights index cell when cell is selected
+     *highlights index header cell when cell is selected
      */
     private void colorIndexCell()
     {
@@ -473,7 +460,7 @@ public class FXMLDocumentController implements Initializable
     }
     
     /*
-        handling opening of other windows
+        handling opening of other external windows, feedback settings help/tutorial
     */
     private void openWindow(String url, String style, String title, boolean isResizable)
     {
@@ -495,6 +482,13 @@ public class FXMLDocumentController implements Initializable
         }
     }
     
+    //used to change title of window, used when opening a file the title will include users selected file
+    private void setTitleOfScreen(String name)
+    {
+        Stage mainStage = (Stage) anchor.getScene().getWindow();
+        mainStage.setTitle("Your current sheet = [ " + name + " ] " + " - JSheets");
+    }
+    
     /*
         Read file into spreadsheet
     */
@@ -508,8 +502,11 @@ public class FXMLDocumentController implements Initializable
         {
             reader = new BufferedReader(new FileReader(file));
             table.getItems().clear();
-            ObservableList<Row> list = FXCollections.observableArrayList(this.refreshRows());
+            ObservableList<Row> list = FXCollections.observableArrayList(this.resetRows());
             table.setItems(list);
+            
+            this.setTitleOfScreen(file.getName());
+            
             lineRead = reader.readLine();
             while(lineRead != null && count < 31)
             {
@@ -551,6 +548,8 @@ public class FXMLDocumentController implements Initializable
                 writer = new PrintWriter(file.getAbsolutePath() + "." + ext);
             }
             
+            this.setTitleOfScreen(file.getName());
+            
             for(Row row : table.getItems())
             {
                 output += row.csvString() + "\n";
@@ -567,7 +566,7 @@ public class FXMLDocumentController implements Initializable
     /*
         Create empty rows when creating a new sheet or loading another
     */
-    private List<Row> refreshRows()
+    private List<Row> resetRows()
     {
         List<Row> result = new ArrayList<>();
         for (int i = 0; i <= 30; i++)

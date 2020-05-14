@@ -62,7 +62,8 @@ public class HelpWindowController implements Initializable
                               "2. Enter data into cells without pressing Enter to confirm edit.\n" + 
                               "3. More functionality and integration with XSpread.\n" + 
                               "4. TODO: add more functional windows.\n" + 
-                              "5. Open multiple sheets at once in the interface");
+                              "5. Open multiple sheets at once in the interface\n" +
+                              "6. TODO: add keyboard shortcuts");
         futureRelease.setWrapText(true);
         
     }    
