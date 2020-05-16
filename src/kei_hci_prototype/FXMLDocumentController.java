@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -28,7 +29,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -76,35 +81,70 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private Button saveButton, openButton, newButton, exportButton, printButton,
             undoButton, redoButton, copyButton, cutButton, pasteButton, feedbackButton, settingsButton,
-            helpButton;
+            helpButton, enterCellButton, saveAsButton;
+    //fields
+    private Map<String, TableColumn<Row, String>> cols;
+    private TableColumn prevCol = null;
+    private Row prevRow = null;
+    private ObservableList<Row> rowz;
+    private ObservableList<TablePosition> selectedCells;
+    private  ScrollBar s1, verti, horiz;
+    private double sc = 0.0;
+    private File currFile = null;
     
     //open file chooser
     @FXML
     void openFile(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new File(System.getProperty("user.home")));
-        fc.setTitle("Open Sheet");
-        fc.getExtensionFilters().addAll(new ExtensionFilter("CSV files", "*.csv"), 
-                                        new ExtensionFilter("SC files", "*.sc"),
-                                        new ExtensionFilter("All files", "*"));
-        File choseFile = fc.showOpenDialog(null);
-        
-        if(choseFile != null)
+        Optional<ButtonType> res = null;
+        if(this.currFile != null)
         {
-            readFile(choseFile);
+            res = this.changeFilePrompt("Save before opening a new file? Or Do you want to stay on current sheet?");
         }
-        else
+        
+        if(res != null && res.get().getText().equals("Save"))
         {
-            System.out.println("no file selected when open");
+            saveFile(event);
+        }
+        
+        if(res == null || !res.get().getText().equals("Stay Here"))
+        {
+            FileChooser fc = new FileChooser();
+            fc.setInitialDirectory(new File(System.getProperty("user.home")));
+            fc.setTitle("Open Sheet");
+            fc.getExtensionFilters().addAll(new ExtensionFilter("CSV files", "*.csv"), 
+                                            new ExtensionFilter("SC files", "*.sc"),
+                                            new ExtensionFilter("All files", "*"));
+            File choseFile = fc.showOpenDialog(null);
+
+            if(choseFile != null)
+            {
+                readFile(choseFile);
+            }
+            else
+            {
+                System.out.println("no file selected when open");
+            }
         }
 
     }
     
     @FXML
     void saveFile(ActionEvent event) {
+        if(this.currFile != null)
+        {
+            this.writeToFile(this.currFile, ".csv");
+        }
+        else
+        {
+            saveAs(event);
+        }
+    }
+    
+    @FXML
+    void saveAs(ActionEvent event) {
         FileChooser fc = new FileChooser();
         fc.setInitialDirectory(new File(System.getProperty("user.home")));
-        fc.setTitle("Save Sheet");
+        fc.setTitle("Save Sheet As...");
         fc.setInitialFileName("name.csv");
         fc.getExtensionFilters().addAll(new ExtensionFilter("CSV files", "*.csv"), 
                                         new ExtensionFilter("SC files", "*.sc"));
@@ -121,7 +161,32 @@ public class FXMLDocumentController implements Initializable
         {
             System.out.println("file not selected for save");
         }
+    }
+    
+    @FXML
+    void newFile(ActionEvent event) {
 
+        Optional<ButtonType> res = this.changeFilePrompt("Save before creating a new file? Or Do you want to stay on current sheet?");
+        //save if user press yes
+        if(res.get().getText().equals("Save"))
+        {
+            saveFile(event);
+        }
+        System.out.println(res.get());
+        if(!res.get().getText().equals("Stay Here"))//if user does not press Stay Here
+        {
+            resetRows();
+            this.setTitleOfScreen("New Sheet");
+            this.currFile = null;
+            table.getItems().clear();
+            ObservableList<Row> list = FXCollections.observableArrayList(this.resetRows());
+            table.setItems(list);
+        }
+    }
+    
+    @FXML
+    void openPieWIndow(ActionEvent event) {
+        createPie();
     }
     
     //fmxml feedback button handler
@@ -142,13 +207,6 @@ public class FXMLDocumentController implements Initializable
         this.openWindow("/settings_window/SettingsWindow.fxml", 
                         "/CSS/settings/settingsStyle.css", "Settings", true);
     }
-
-    private Map<String, TableColumn<Row, String>> cols;
-    private TableColumn prevCol = null;
-    private Row prevRow = null;
-    private ObservableList<Row> rowz;
-    private  ScrollBar s1, verti, horiz;
-    private double sc = 0.0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -185,7 +243,7 @@ public class FXMLDocumentController implements Initializable
         }
 
         //set up table listeners
-        ObservableList<TablePosition> selectedCells = table.getSelectionModel().getSelectedCells();
+        selectedCells = table.getSelectionModel().getSelectedCells();
         rowz = table.getSelectionModel().getSelectedItems();
 
         table.getSelectionModel().setCellSelectionEnabled(true);//use cell selection model
@@ -224,10 +282,11 @@ public class FXMLDocumentController implements Initializable
                     
                     prevCol.getStyleClass().add("table-row-cell");//highlight actual cell selected
                     prevCol.getStyleClass().add("headerColor");//highlight column header when select
-                    cellSelected.setText("Cells Selected: " + lastCol + lastRow);
+                    
+                    cellSelected.setText("Cells Selected: " + lastCol + lastRow + "\nValue: " + t.getTableColumn().getCellData(lastRow));//show position and value of that cell
                     if (change.getList().size() > 1)
                     {
-                        cellSelected.setText("Cells Selected: " + startCol + startRow + ":" + lastCol + lastRow);
+                        cellSelected.setText("Cells Selected: " + startCol + startRow + ":" + lastCol + lastRow);//show position and value of that cell
                     }
                 }
 
@@ -273,6 +332,27 @@ public class FXMLDocumentController implements Initializable
             }
         });
         
+        //cell text box Selection listener
+        enterCellButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event)
+            {
+                String getText = cellText.getText().toUpperCase();
+                try
+                {
+                    if(!getText.equals("ALL"))
+                    {
+                        selectCells(getText);
+                    }
+                }
+                catch(NumberFormatException e)
+                {
+                    cellText.setText("Invalid cells");
+                    System.out.println("Error: " + e.getMessage());
+                }    
+            }       
+        });
+        //cell text box Selection listener
         cellText.setOnKeyReleased(new EventHandler<KeyEvent>() 
         {
             @Override
@@ -287,48 +367,10 @@ public class FXMLDocumentController implements Initializable
                     {
                         table.getSelectionModel().selectAll();
                     }
-                    else if(getText.length() >= 2 && !getText.contains(":") && t.getCode().equals(t.getCode().ENTER))
+                    else if(t.getCode().equals(t.getCode().ENTER))
                     {
-                        int rowNum = Integer.valueOf(getText.substring(1));
-                        String colId = String.valueOf(getText.charAt(0));
-
-                        if(rowNum >= 0 && cols.containsKey(colId) && rowNum <= indexList.getItems().size())
-                        {
-                            table.getSelectionModel().clearSelection();
-                            //System.out.println("Hey I'm a cell " + getText.length());
-                            table.getSelectionModel().select(rowNum, cols.get(colId));
-                        }
-                        else
-                        {
-                            throw new NumberFormatException("invalid row index: " + rowNum);
-                        }
-                    }
-                    else if(getText.length() >= 5 && getText.contains(":") && t.getCode().equals(t.getCode().ENTER))
-                    {
-                        System.out.println("Hey I'm a bunch of cells");            
-                        String startCol, endCol;
-                        int startRow, endRow;
-                        String[] strArr = getText.split(":");
-
-                        startCol = strArr[0].substring(0,1);
-                        endCol = strArr[1].substring(0,1);
-                        startRow = Integer.valueOf(strArr[0].substring(1));
-                        endRow = Integer.valueOf(strArr[1].substring(1));
-
-                        if(cols.containsKey(startCol) && cols.containsKey(endCol))
-                        {
-                            if(startRow <= indexList.getItems().size() && 
-                                    endRow <= indexList.getItems().size() && startRow >= 0 && endRow >= 0)
-                            {
-                                table.getSelectionModel().clearSelection();
-                                table.getSelectionModel().selectRange(startRow, cols.get(startCol), endRow, cols.get(endCol));
-                            }
-                            else
-                            {
-                                throw new NumberFormatException("invalid bunch row index");
-                            }                      
-                        }
-                    }
+                        selectCells(getText);
+                    }   
                 }
                 catch(NumberFormatException e)
                 {
@@ -354,6 +396,7 @@ public class FXMLDocumentController implements Initializable
     {
         //buttons
         this.saveButton.setTooltip(new Tooltip("Save\nCTRL + S"));
+        this.saveAsButton.setTooltip(new Tooltip("Save As"));
         this.openButton.setTooltip(new Tooltip("Open\nCTRL + O"));
         this.newButton.setTooltip(new Tooltip("New\nCTRL + N"));
         this.printButton.setTooltip(new Tooltip("Print\nCTRL + P"));
@@ -482,7 +525,39 @@ public class FXMLDocumentController implements Initializable
         }
     }
     
-    //used to change title of window, used when opening a file the title will include users selected file
+    /*
+        prompt user to save before opening another file
+    */
+    private Optional<ButtonType> changeFilePrompt(String prompt)
+    {
+        //alert user if they want to save current sheet before creating a new one
+        ButtonType yesSave = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        ButtonType noSave = new ButtonType("Don't Save", ButtonBar.ButtonData.NO);
+        ButtonType noClose = new ButtonType("Stay Here", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert a = new Alert(AlertType.CONFIRMATION, prompt, 
+                            yesSave, noSave, noClose); 
+        a.getDialogPane().setPrefSize(500, 300);
+
+        return a.showAndWait();
+    }
+    
+    private void createPie()
+    {
+        int prevRowNum = this.selectedCells.get(0).getRow();
+        PieChartWindow thePie = new PieChartWindow();
+        for(int i = 0; i < (this.selectedCells.size()/2); i++)
+        {
+            TablePosition tp = this.selectedCells.get(i);
+            String key = tp.getTableColumn().getCellData(tp.getRow()).toString();
+            double value = Double.valueOf(tp.getTableColumn().getCellData(tp.getRow() + 1).toString());
+            thePie.addSlice(key, value);
+//            System.out.println(key + value);
+        }
+        
+        thePie.startWindow();
+    }
+    
+    //used to change title of window, just import a name of the file
     private void setTitleOfScreen(String name)
     {
         Stage mainStage = (Stage) anchor.getScene().getWindow();
@@ -506,6 +581,7 @@ public class FXMLDocumentController implements Initializable
             table.setItems(list);
             
             this.setTitleOfScreen(file.getName());
+            this.currFile = file;
             
             lineRead = reader.readLine();
             while(lineRead != null && count < 31)
@@ -549,6 +625,7 @@ public class FXMLDocumentController implements Initializable
             }
             
             this.setTitleOfScreen(file.getName());
+            this.currFile = file;
             
             for(Row row : table.getItems())
             {
@@ -556,10 +633,58 @@ public class FXMLDocumentController implements Initializable
             }
             writer.println(output);
             writer.close();
+            Alert success = new Alert(AlertType.INFORMATION, "Save to " + file.getName() + " Successful");
+            success.showAndWait();
         }
         catch(IOException e)
         {
             System.out.println("error with saving file");
+        }
+    }
+    
+    private void selectCells(String getText)
+    {
+        if(getText.length() >= 2 && !getText.contains(":"))
+        {
+            int rowNum = Integer.valueOf(getText.substring(1));
+            String colId = String.valueOf(getText.charAt(0));
+
+            if(rowNum >= 0 && cols.containsKey(colId) && rowNum <= indexList.getItems().size())
+            {
+                table.getSelectionModel().clearSelection();
+                //System.out.println("Hey I'm a cell " + getText.length());
+                table.getSelectionModel().select(rowNum, cols.get(colId));
+            }
+            else
+            {
+                throw new NumberFormatException("invalid row index: " + rowNum);
+            }
+        }
+        else if(getText.length() >= 5 && getText.contains(":"))
+        {
+            System.out.println("Hey I'm a bunch of cells");            
+            String startCol, endCol;
+            int startRow, endRow;
+            String[] strArr = getText.split(":");
+
+            startCol = strArr[0].substring(0,1);
+            endCol = strArr[1].substring(0,1);
+            startRow = Integer.valueOf(strArr[0].substring(1));
+            endRow = Integer.valueOf(strArr[1].substring(1));
+
+            if(cols.containsKey(startCol) && cols.containsKey(endCol))
+            {
+                if(startRow <= indexList.getItems().size() && 
+                        endRow <= indexList.getItems().size() && startRow >= 0 && endRow >= 0)
+                {
+                    table.getSelectionModel().clearSelection();
+                    table.getSelectionModel().selectRange(startRow, cols.get(startCol), endRow, cols.get(endCol));
+                }
+                else
+                {
+                    throw new NumberFormatException("invalid bunch row index");
+                }                      
+            }
         }
     }
     

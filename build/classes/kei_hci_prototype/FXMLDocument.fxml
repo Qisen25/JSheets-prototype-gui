@@ -22,9 +22,10 @@
                <children>
                   <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveFile" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="openButton" layoutX="66.0" onAction="#openFile" prefHeight="34.0" prefWidth="46.0" />
-                  <Button fx:id="newButton" layoutX="1.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="newButton" layoutX="1.0" layoutY="43.0" mnemonicParsing="false" onAction="#newFile" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="exportButton" layoutX="125.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="printButton" layoutX="66.0" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <Button fx:id="saveAsButton" layoutX="125.0" layoutY="43.0" mnemonicParsing="false" onAction="#saveAs" prefHeight="34.0" prefWidth="46.0" />
                </children>
             </Pane>
             <Pane fx:id="editPane" layoutX="20.0" layoutY="240.0" prefHeight="146.0" prefWidth="171.0">
@@ -44,11 +45,11 @@
                     <content>
                       <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="206.0">
                            <children>
-                              <ScrollPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="84.0" prefWidth="208.0">
+                              <ScrollPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="113.0" prefWidth="208.0">
                                 <content>
                                   <AnchorPane fx:id="chartPane" minHeight="0.0" minWidth="0.0" prefHeight="203.0" prefWidth="200.0">
                                        <children>
-                                          <Button fx:id="pieButton" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Pie" />
+                                          <Button fx:id="pieButton" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" onAction="#openPieWIndow" prefHeight="26.0" prefWidth="171.0" text="Pie" />
                                           <Button fx:id="histoButton" layoutX="3.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Histogram" />
                                           <Button fx:id="lineButton" layoutX="3.0" layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Line" />
                                        </children>
@@ -62,7 +63,7 @@
                   <content>
                     <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="200.0">
                            <children>
-                              <ScrollPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="90.0" prefWidth="208.0">
+                              <ScrollPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="112.0" prefWidth="208.0">
                                 <content>
                                   <AnchorPane fx:id="mathPane" minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="200.0">
                                        <children>
@@ -89,7 +90,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ScrollPane prefHeight="85.0" prefWidth="208.0">
+                              <ScrollPane prefHeight="111.0" prefWidth="208.0">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
                                 </content>
@@ -101,7 +102,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ScrollPane prefHeight="88.0" prefWidth="208.0">
+                              <ScrollPane prefHeight="110.0" prefWidth="208.0">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
                                 </content>
@@ -109,14 +110,6 @@
                            </children></AnchorPane>
                   </content>
                 </TitledPane>
-                  <TitledPane animated="false" prefHeight="156.0" prefWidth="118.0" text="Quick Click">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <ListView layoutX="-1.0" layoutY="1.0" prefHeight="182.0" prefWidth="208.0" />
-                           </children></AnchorPane>
-                    </content>
-                  </TitledPane>
               </panes>
             </Accordion>
             <Label fx:id="toolsTitle" layoutX="33.0" layoutY="406.0" prefHeight="16.0" prefWidth="127.0" text="Tools" />
@@ -126,7 +119,7 @@
             <Button fx:id="feedbackButton" layoutX="182.0" layoutY="637.0" mnemonicParsing="false" onAction="#startFeedback" prefHeight="36.0" prefWidth="46.0" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
-      <Label fx:id="cellSelected" layoutX="14.0" layoutY="636.0" prefHeight="16.0" prefWidth="178.0" text="Cells Selected:" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="14.0" />
+      <Label fx:id="cellSelected" layoutX="14.0" layoutY="618.0" prefHeight="36.0" prefWidth="178.0" text="Cells Selected:" wrapText="true" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="14.0" />
       <TextField fx:id="cellText" layoutX="192.0" layoutY="631.0" prefHeight="26.0" prefWidth="99.0" promptText="Enter Cells..." AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="192.0" />
       <AnchorPane fx:id="spreadPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="603.0" prefWidth="853.0" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="231.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -134,8 +127,10 @@
             <ListView fx:id="indexList" layoutX="-2.0" layoutY="27.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="561.0" prefWidth="53.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="27.0" />
          </children>
       </AnchorPane>
-      <TextField layoutX="317.0" layoutY="631.0" promptText="Formula...." AnchorPane.bottomAnchor="15.0" />
-      <TextField layoutX="521.0" layoutY="631.0" prefHeight="26.0" prefWidth="134.0" promptText="Find..." AnchorPane.bottomAnchor="15.0" />
-      <Button fx:id="findButton" layoutX="655.0" layoutY="631.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.bottomAnchor="15.0" />
+      <TextField layoutX="353.0" layoutY="631.0" promptText="Formula...." AnchorPane.bottomAnchor="15.0" />
+      <TextField layoutX="567.0" layoutY="631.0" prefHeight="26.0" prefWidth="134.0" promptText="Find..." AnchorPane.bottomAnchor="15.0" />
+      <Button fx:id="findButton" layoutX="701.0" layoutY="629.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.bottomAnchor="13.0" />
+      <Button fx:id="enterCellButton" layoutX="291.0" layoutY="631.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" AnchorPane.bottomAnchor="15.0" />
+      <Button fx:id="formulaButton" layoutX="524.0" layoutY="631.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" AnchorPane.bottomAnchor="15.0" />
     </children>
 </AnchorPane>
