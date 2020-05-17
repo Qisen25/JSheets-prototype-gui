@@ -12,7 +12,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  *
- * @author student
+ * @author Kei Wang 19126089
  */
 public class Row {
     
@@ -162,6 +162,13 @@ public class Row {
     
     public void setByIndex(int i, String str)
     {
+        this.cols[i].set(str);
+    }
+    
+    public void setByChar(char c, String str)
+    {
+        int i = c - 'A';
+        
         this.cols[i].set(str);
     }
     

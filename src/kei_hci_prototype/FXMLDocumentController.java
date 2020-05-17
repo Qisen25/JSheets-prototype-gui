@@ -44,6 +44,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -184,9 +185,16 @@ public class FXMLDocumentController implements Initializable
         }
     }
     
+    //button to create pie chart
     @FXML
     void openPieWIndow(ActionEvent event) {
-        createPie();
+        this.createPie();
+    }
+    
+    //create sum when sum button pressed
+    @FXML
+    void sumButtonResult(ActionEvent event) {
+        this.sumCalcWindow();
     }
     
     //fmxml feedback button handler
@@ -201,7 +209,7 @@ public class FXMLDocumentController implements Initializable
         this.openWindow("/help_window/HelpWindow.fxml", 
                         "/CSS/help/helpStyle.css", "Help", false);
     }
-
+    
     @FXML
     void startSettings(ActionEvent event) {
         this.openWindow("/settings_window/SettingsWindow.fxml", 
@@ -541,20 +549,84 @@ public class FXMLDocumentController implements Initializable
         return a.showAndWait();
     }
     
+    /*
+        function to create a pie chart
+    */
     private void createPie()
     {
-        int prevRowNum = this.selectedCells.get(0).getRow();
-        PieChartWindow thePie = new PieChartWindow();
-        for(int i = 0; i < (this.selectedCells.size()/2); i++)
+        try
         {
-            TablePosition tp = this.selectedCells.get(i);
-            String key = tp.getTableColumn().getCellData(tp.getRow()).toString();
-            double value = Double.valueOf(tp.getTableColumn().getCellData(tp.getRow() + 1).toString());
-            thePie.addSlice(key, value);
-//            System.out.println(key + value);
-        }
+            PieChartWindow thePie = new PieChartWindow();
+            for(int i = 0; i < (this.selectedCells.size()/2); i++)
+            {
+                TablePosition tp = this.selectedCells.get(i);
+                String key = tp.getTableColumn().getCellData(tp.getRow()).toString();
+                double value = Double.valueOf(tp.getTableColumn().getCellData(tp.getRow() + 1).toString());
+                thePie.addSlice(key, value);
+    //            System.out.println(key + value);
+            }
         
-        thePie.startWindow();
+            thePie.startWindow();
+        }
+        catch(NumberFormatException ne)
+        {
+            Alert numErr = new Alert(AlertType.WARNING, "Error: a value in second selected row not a number");
+            numErr.showAndWait();
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            Alert err = new Alert(AlertType.WARNING, "No cells selected!");
+            err.showAndWait();
+        }
+    }
+    
+    private void sumCalcWindow()
+    {
+        if(!this.selectedCells.isEmpty())
+        {
+            TextInputDialog sumWindow = new TextInputDialog();
+            sumWindow.setHeaderText("Enter cell to put sum result");
+            Optional<String> res = sumWindow.showAndWait();
+            if(res.get().length() > 1 && res != null)
+            {
+                try
+                {
+                    int rowNum = Integer.valueOf(res.get().substring(1));
+                    String colId = String.valueOf(res.get().charAt(0));
+
+                    if(colId.charAt(0) >= 'A' && colId.charAt(0) <= 'K' && rowNum <= 30 && !this.selectedCells.isEmpty())
+                    {
+                        try
+                        {
+                            int result = 0;
+                            for(TablePosition tp : this.selectedCells)
+                            {
+                                result += Integer.valueOf((String) tp.getTableColumn().getCellData(tp.getRow()));
+                            }
+                            table.getSelectionModel().clearAndSelect(rowNum, this.cols.get(colId));
+                            table.getSelectionModel().getSelectedItem().setByChar(colId.charAt(0), String.valueOf(result));
+                            table.getItems().set(rowNum, table.getSelectionModel().getSelectedItem());
+                            table.getSelectionModel().clearAndSelect(rowNum, this.cols.get(colId));
+                        }
+                        catch(NumberFormatException e)
+                        {
+                            Alert sumAlert = new Alert(AlertType.WARNING, "Error invalid numeric value: " + e.getMessage());
+                            sumAlert.showAndWait();
+                        }
+                    }
+                }     
+                catch(NumberFormatException e)
+                {
+                    Alert sumAlert = new Alert(AlertType.WARNING, "Error cell row must be a number: " + e.getMessage());
+                    sumAlert.showAndWait();
+                }
+            }
+        }
+        else
+        {
+            Alert sumAlert = new Alert(AlertType.WARNING, "Please select cells!");
+            sumAlert.showAndWait();
+        }
     }
     
     //used to change title of window, just import a name of the file

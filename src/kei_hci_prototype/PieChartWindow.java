@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author beepbeep
+ * @author Kei Wang 19126089
  */
 public class PieChartWindow
 {

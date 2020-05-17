@@ -63,7 +63,9 @@ public class HelpWindowController implements Initializable
                               "3. More functionality and integration with XSpread.\n" + 
                               "4. TODO: add more functional windows.\n" + 
                               "5. Open multiple sheets at once in the interface\n" +
-                              "6. TODO: add keyboard shortcuts");
+                              "6. TODO: add keyboard shortcuts\n" + 
+                              "7. Font size setter still needs to be implemented.\n" + 
+                              "8. Need to improve drag scrolling");
         futureRelease.setWrapText(true);
         
     }    

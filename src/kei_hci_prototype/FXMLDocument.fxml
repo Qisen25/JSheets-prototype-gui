@@ -35,6 +35,13 @@
                   <Button fx:id="cutButton" layoutY="1.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="pasteButton" layoutY="88.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
                   <Button fx:id="copyButton" layoutY="43.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" />
+                  <MenuButton layoutX="77.0" layoutY="119.0" mnemonicParsing="false" text="Font Size">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Small (10px)" />
+                      <MenuItem mnemonicParsing="false" text="Medium (13px)" />
+                        <MenuItem mnemonicParsing="false" text="Large (20px)" />
+                    </items>
+                  </MenuButton>
                </children>
             </Pane>
             <Label fx:id="fileTitle" layoutX="20.0" layoutY="75.0" prefHeight="16.0" prefWidth="127.0" text="  File" />
@@ -67,7 +74,7 @@
                                 <content>
                                   <AnchorPane fx:id="mathPane" minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="200.0">
                                        <children>
-                                          <Button fx:id="sumButton" layoutX="3.0" layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Sum" />
+                                          <Button fx:id="sumButton" layoutX="3.0" layoutY="35.0" mnemonicParsing="false" onAction="#sumButtonResult" prefHeight="26.0" prefWidth="168.0" text="Sum" />
                                           <Button fx:id="prodButton" layoutX="3.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Product" />
                                           <Button fx:id="avgButton" layoutX="3.0" layoutY="100.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Average" />
                                           <Button fx:id="minButton" layoutX="3.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" text="Min" />
@@ -92,7 +99,11 @@
                            <children>
                               <ScrollPane prefHeight="111.0" prefWidth="208.0">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                                  <AnchorPane fx:id="sortPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="ascButton" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" text="Ascending" />
+                                          <Button fx:id="descButton" layoutY="47.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" text="Descending" />
+                                       </children></AnchorPane>
                                 </content>
                               </ScrollPane>
                            </children></AnchorPane>
@@ -104,7 +115,10 @@
                            <children>
                               <ScrollPane prefHeight="110.0" prefWidth="208.0">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                                  <AnchorPane fx:id="timePane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="clockTimeButton" layoutX="6.0" layoutY="20.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" text="Get Time Now" />
+                                       </children></AnchorPane>
                                 </content>
                               </ScrollPane>
                            </children></AnchorPane>
